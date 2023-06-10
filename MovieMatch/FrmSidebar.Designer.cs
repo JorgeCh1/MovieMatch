@@ -207,6 +207,7 @@
             // FrmSidebar
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
             this.ClientSize = new System.Drawing.Size(1035, 693);
             this.Controls.Add(this.sidebar);
             this.Controls.Add(this.panel1);
