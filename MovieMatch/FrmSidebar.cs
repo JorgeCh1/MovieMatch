@@ -21,6 +21,7 @@ namespace MovieMatch
         {
             InitializeComponent();
             mdiProperties();
+            IsMdiContainer = true;
         }
 
         private void mdiProperties()
