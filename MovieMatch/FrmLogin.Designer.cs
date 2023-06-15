@@ -34,6 +34,7 @@
             this.txtUser = new System.Windows.Forms.TextBox();
             this.btnIngresar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
+            this.btnRegistrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -61,19 +62,19 @@
             this.txtPassword.Location = new System.Drawing.Point(149, 81);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(152, 20);
+            this.txtPassword.Size = new System.Drawing.Size(156, 20);
             this.txtPassword.TabIndex = 2;
             // 
             // txtUser
             // 
             this.txtUser.Location = new System.Drawing.Point(149, 39);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(152, 20);
+            this.txtUser.Size = new System.Drawing.Size(156, 20);
             this.txtUser.TabIndex = 1;
             // 
             // btnIngresar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(149, 128);
+            this.btnIngresar.Location = new System.Drawing.Point(149, 119);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(75, 23);
             this.btnIngresar.TabIndex = 3;
@@ -83,7 +84,7 @@
             // 
             // btnCerrar
             // 
-            this.btnCerrar.Location = new System.Drawing.Point(328, 12);
+            this.btnCerrar.Location = new System.Drawing.Point(396, 12);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(27, 23);
             this.btnCerrar.TabIndex = 5;
@@ -91,12 +92,23 @@
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
+            // btnRegistrar
+            // 
+            this.btnRegistrar.Location = new System.Drawing.Point(230, 119);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrar.TabIndex = 6;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
+            // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(369, 185);
+            this.ClientSize = new System.Drawing.Size(435, 185);
+            this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.txtUser);
@@ -107,7 +119,6 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.FrmLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,5 +132,6 @@
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.Button btnIngresar;
         private System.Windows.Forms.Button btnCerrar;
+        private System.Windows.Forms.Button btnRegistrar;
     }
 }
