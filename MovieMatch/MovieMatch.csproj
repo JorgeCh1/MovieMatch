@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiManager.cs" />
+    <Compile Include="Encrypt.cs" />
     <Compile Include="FrmHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +108,12 @@
     <Compile Include="FrmWishlist.Designer.cs">
       <DependentUpon>FrmWishlist.cs</DependentUpon>
     </Compile>
+    <Compile Include="SignIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SignIn.Designer.cs">
+      <DependentUpon>SignIn.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,6 +132,7 @@
     <EmbeddedResource Include="FrmWishlist.resx">
       <DependentUpon>FrmWishlist.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -135,6 +143,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SignIn.resx">
+      <DependentUpon>SignIn.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -151,7 +162,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
+<<<<<<< HEAD
       <Project>{63a9dced-eca4-41a2-b4f1-8242294ee9b4}</Project>
+=======
+      <Project>{915317bb-a146-485c-b482-e44c17c18e40}</Project>
+>>>>>>> 447458bd33c78773715b8f31259731d66c9c3dda
       <Name>Entidades</Name>
     </ProjectReference>
   </ItemGroup>

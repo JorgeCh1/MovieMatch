@@ -36,7 +36,7 @@ namespace Entidades
         public string Usuario { get; set; }
 
         [Required]
-        [StringLength(60)]
+        [StringLength(64)]
         public string Clave { get; set; }
 
         [Required]
