@@ -16,8 +16,26 @@ namespace MovieMatch
         public int TotalPages { get; set; }
     }
 
+    public class GenreResponse
+    {
+        [JsonProperty("genres")]
+        public List<Genre> Genres { get; set; }
+    }
+
+    public class Genre
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+    }
+
     public class Movie
     {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
         [JsonProperty("original_title")]
         public string Title { get; set; }
 
@@ -28,15 +46,15 @@ namespace MovieMatch
         public string Overview { get; set; }
 
         [JsonProperty("vote_average")]
-        public decimal Rating { get; set; }
+        public double Rating { get; set; }
 
         [JsonProperty("poster_path")]
         public string Poster { get; set; }
 
-        /*[JsonProperty("genre_ids")]
-        public string Genere { get; set; }*/
+        [JsonProperty("genre_ids")]
+        public List<int> GenreIds { get; set; }
 
-        // Agrega más propiedades según los datos que necesites de la película
+        public List<string> Genres { get; set; }
     }
 
 }

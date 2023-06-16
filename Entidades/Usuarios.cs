@@ -6,9 +6,14 @@ namespace Entidades
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Usuario")]
-    public partial class Usuario
+    public partial class Usuarios
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Usuarios()
+        {
+            Comentarios = new HashSet<Comentarios>();
+        }
+
         [Key]
         public int IdUsuario { get; set; }
 
@@ -26,10 +31,9 @@ namespace Entidades
         [StringLength(50)]
         public string SegunoApellido { get; set; }
 
-        [Column("Usuario")]
         [Required]
         [StringLength(50)]
-        public string Usuario1 { get; set; }
+        public string Usuario { get; set; }
 
         [Required]
         [StringLength(60)]
@@ -44,5 +48,8 @@ namespace Entidades
 
         [MaxLength(200)]
         public byte[] Imagen { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comentarios> Comentarios { get; set; }
     }
 }

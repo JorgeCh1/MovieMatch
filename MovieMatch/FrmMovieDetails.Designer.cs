@@ -33,6 +33,8 @@
             this.lblRating = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblOverview = new System.Windows.Forms.Label();
+            this.lblGenere = new System.Windows.Forms.Label();
+            this.chkSaveMovie = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoster)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,12 +83,34 @@
             this.lblOverview.TabIndex = 2;
             this.lblOverview.Text = "Sinopsis";
             // 
+            // lblGenere
+            // 
+            this.lblGenere.AutoSize = true;
+            this.lblGenere.Location = new System.Drawing.Point(474, 588);
+            this.lblGenere.Name = "lblGenere";
+            this.lblGenere.Size = new System.Drawing.Size(46, 17);
+            this.lblGenere.TabIndex = 5;
+            this.lblGenere.Text = "label1";
+            // 
+            // chkSaveMovie
+            // 
+            this.chkSaveMovie.AutoSize = true;
+            this.chkSaveMovie.Location = new System.Drawing.Point(88, 545);
+            this.chkSaveMovie.Name = "chkSaveMovie";
+            this.chkSaveMovie.Size = new System.Drawing.Size(56, 21);
+            this.chkSaveMovie.TabIndex = 6;
+            this.chkSaveMovie.Text = "Like";
+            this.chkSaveMovie.UseVisualStyleBackColor = true;
+            this.chkSaveMovie.CheckedChanged += new System.EventHandler(this.chkSaveMovie_CheckedChanged_1);
+            // 
             // FrmMovieDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
             this.ClientSize = new System.Drawing.Size(1022, 740);
+            this.Controls.Add(this.chkSaveMovie);
+            this.Controls.Add(this.lblGenere);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblRating);
             this.Controls.Add(this.lblOverview);
@@ -109,5 +133,7 @@
         private System.Windows.Forms.Label lblRating;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblOverview;
+        private System.Windows.Forms.Label lblGenere;
+        private System.Windows.Forms.CheckBox chkSaveMovie;
     }
 }

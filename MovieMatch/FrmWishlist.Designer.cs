@@ -28,7 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.lvWishlist = new System.Windows.Forms.ListView();
+            this.ilWishlist = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
+            // 
+            // lvWishlist
+            // 
+            this.lvWishlist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            this.lvWishlist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvWishlist.HideSelection = false;
+            this.lvWishlist.Location = new System.Drawing.Point(0, 0);
+            this.lvWishlist.Name = "lvWishlist";
+            this.lvWishlist.Size = new System.Drawing.Size(800, 450);
+            this.lvWishlist.TabIndex = 0;
+            this.lvWishlist.UseCompatibleStateImageBehavior = false;
+            // 
+            // ilWishlist
+            // 
+            this.ilWishlist.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.ilWishlist.ImageSize = new System.Drawing.Size(16, 16);
+            this.ilWishlist.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // FrmWishlist
             // 
@@ -36,6 +56,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lvWishlist);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmWishlist";
             this.Text = "Wishlist";
@@ -45,5 +66,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.ListView lvWishlist;
+        private System.Windows.Forms.ImageList ilWishlist;
     }
 }

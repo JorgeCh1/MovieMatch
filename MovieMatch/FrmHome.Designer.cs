@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lvAllMovies = new System.Windows.Forms.ListView();
-            this.ilAllMovies = new System.Windows.Forms.ImageList(this.components);
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -46,12 +44,6 @@
             this.lvAllMovies.TabIndex = 0;
             this.lvAllMovies.UseCompatibleStateImageBehavior = false;
             this.lvAllMovies.SelectedIndexChanged += new System.EventHandler(this.lvAllMovies_SelectedIndexChanged);
-            // 
-            // ilAllMovies
-            // 
-            this.ilAllMovies.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.ilAllMovies.ImageSize = new System.Drawing.Size(16, 16);
-            this.ilAllMovies.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // txtSearch
             // 
@@ -84,7 +76,6 @@
         #endregion
 
         private System.Windows.Forms.ListView lvAllMovies;
-        private System.Windows.Forms.ImageList ilAllMovies;
         private System.Windows.Forms.TextBox txtSearch;
     }
 }
