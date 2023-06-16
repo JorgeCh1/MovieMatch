@@ -7,7 +7,7 @@ namespace Entidades
     using System.Data.Entity.Spatial;
 
     [Table("Usuario")]
-    public partial class Usuario
+    public partial class Usuarios
     {
         [Key]
         public int IdUsuario { get; set; }
@@ -29,7 +29,7 @@ namespace Entidades
         [Column("Usuario")]
         [Required]
         [StringLength(50)]
-        public string Usuario1 { get; set; }
+        public string Usuario { get; set; }
 
         [Required]
         [StringLength(60)]
