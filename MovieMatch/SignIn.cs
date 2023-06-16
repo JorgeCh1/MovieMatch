@@ -44,6 +44,9 @@ namespace MovieMatch
                 try
                 {
                     context.SaveChanges();
+                    this.Hide();
+                    FrmLogin loginForm = new FrmLogin();
+                    loginForm.Show();
                 }
                 catch (DbEntityValidationException ex)
                 {
