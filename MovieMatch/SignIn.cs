@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,19 +18,29 @@ namespace MovieMatch
             InitializeComponent();
         }
 
-        private void textBox5_TextChanged(object sender, EventArgs e)
+        private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            DateTime now = DateTime.Now;
+            string sPass = Encrypt.GetSHA256(txtClave.Text.Trim());
 
-        }
+            using (var context = new EntityContext())
+            { 
 
-        private void label7_Click(object sender, EventArgs e)
-        {
+                var us = new Usuarios()
+                {
+                    PrimerNombre = txtPrimerNombre.Text,
+                    SegundoNombre = txtSegundoNombre.Text,
+                    PrimerApellido = txtPrimerApellido.Text,
+                    SegunoApellido = txtSegundoApellido.Text,
+                    Usuario = txtUsuario.Text,
+                    Clave = sPass,
 
-        }
+                    //FechaCreacionCuenta = now
+                };
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
+                context.Usuarios.Add(us);
+                context.SaveChanges();
+            }
         }
     }
 }

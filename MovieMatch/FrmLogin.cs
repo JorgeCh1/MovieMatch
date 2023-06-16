@@ -29,7 +29,7 @@ namespace MovieMatch
 
             using (Entidades.EntityContext context = new EntityContext())
             {
-                var lst = from d in context.Usuario
+                var lst = from d in context.Usuarios
                           where d.Usuario == txtUser.Text
                           && d.Clave == sPass
                           select d;
@@ -37,11 +37,13 @@ namespace MovieMatch
 
                 if (lst.Count() > 0 )
                 {
-                    MessageBox.Show("Usuario Existe");
+                    this.Hide();
+                    FrmHome home = new FrmHome();
+                    home.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Usuario No Existe");
+                    MessageBox.Show("Usuario No Esta Registrado o Clave incorrecta");
                 }
             }
 
@@ -49,8 +51,9 @@ namespace MovieMatch
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-
-
+            this.Hide();
+            Sign_In sign = new Sign_In();
+            sign.Show();
         }
     }
 }

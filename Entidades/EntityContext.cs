@@ -16,7 +16,7 @@ namespace Entidades
         public virtual DbSet<CategoriaAction> CategoriaAction { get; set; }
         public virtual DbSet<Director> Director { get; set; }
         public virtual DbSet<Pelicula> Pelicula { get; set; }
-        public virtual DbSet<Usuarios> Usuario { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

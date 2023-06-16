@@ -31,21 +31,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtPrimerNombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtSegundoNombre = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtPrimerApellido = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtSegundoApellido = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtClave = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txtCorreo = new System.Windows.Forms.TextBox();
+            this.btnRegistrar = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -86,12 +87,12 @@
             this.label2.Text = "Primer Nombre";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // txtPrimerNombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(21, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtPrimerNombre.Location = new System.Drawing.Point(21, 5);
+            this.txtPrimerNombre.Name = "txtPrimerNombre";
+            this.txtPrimerNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtPrimerNombre.TabIndex = 1;
             // 
             // label3
             // 
@@ -104,12 +105,12 @@
             this.label3.Text = "Segundo Nombre";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox2
+            // txtSegundoNombre
             // 
-            this.textBox2.Location = new System.Drawing.Point(21, 50);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 3;
+            this.txtSegundoNombre.Location = new System.Drawing.Point(21, 50);
+            this.txtSegundoNombre.Name = "txtSegundoNombre";
+            this.txtSegundoNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtSegundoNombre.TabIndex = 3;
             // 
             // label4
             // 
@@ -123,13 +124,13 @@
             this.label4.Text = "Primer Apellido";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox3
+            // txtPrimerApellido
             // 
-            this.textBox3.Location = new System.Drawing.Point(21, 95);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
+            this.txtPrimerApellido.Location = new System.Drawing.Point(21, 95);
+            this.txtPrimerApellido.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.txtPrimerApellido.Name = "txtPrimerApellido";
+            this.txtPrimerApellido.Size = new System.Drawing.Size(100, 20);
+            this.txtPrimerApellido.TabIndex = 5;
             // 
             // label5
             // 
@@ -143,13 +144,13 @@
             this.label5.Text = "Segundo Apellido";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox4
+            // txtSegundoApellido
             // 
-            this.textBox4.Location = new System.Drawing.Point(21, 140);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 7;
+            this.txtSegundoApellido.Location = new System.Drawing.Point(21, 140);
+            this.txtSegundoApellido.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.txtSegundoApellido.Name = "txtSegundoApellido";
+            this.txtSegundoApellido.Size = new System.Drawing.Size(100, 20);
+            this.txtSegundoApellido.TabIndex = 7;
             // 
             // label6
             // 
@@ -163,14 +164,13 @@
             this.label6.Text = "Usuario";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox5
+            // txtUsuario
             // 
-            this.textBox5.Location = new System.Drawing.Point(21, 185);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 9;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.txtUsuario.Location = new System.Drawing.Point(21, 185);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(100, 20);
+            this.txtUsuario.TabIndex = 9;
             // 
             // label7
             // 
@@ -183,16 +183,14 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Clave";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
-            // textBox6
+            // txtClave
             // 
-            this.textBox6.Location = new System.Drawing.Point(21, 230);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 11;
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            this.txtClave.Location = new System.Drawing.Point(21, 230);
+            this.txtClave.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.txtClave.Name = "txtClave";
+            this.txtClave.Size = new System.Drawing.Size(100, 20);
+            this.txtClave.TabIndex = 11;
             // 
             // flowLayoutPanel2
             // 
@@ -220,13 +218,14 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.textBox7);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox4);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox6);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox5);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox3);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.btnRegistrar);
+            this.splitContainer1.Panel2.Controls.Add(this.txtCorreo);
+            this.splitContainer1.Panel2.Controls.Add(this.txtSegundoApellido);
+            this.splitContainer1.Panel2.Controls.Add(this.txtClave);
+            this.splitContainer1.Panel2.Controls.Add(this.txtUsuario);
+            this.splitContainer1.Panel2.Controls.Add(this.txtPrimerApellido);
+            this.splitContainer1.Panel2.Controls.Add(this.txtSegundoNombre);
+            this.splitContainer1.Panel2.Controls.Add(this.txtPrimerNombre);
             this.splitContainer1.Size = new System.Drawing.Size(460, 386);
             this.splitContainer1.SplitterDistance = 153;
             this.splitContainer1.TabIndex = 12;
@@ -243,13 +242,23 @@
             this.label8.Text = "Correo Electronico";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox7
+            // txtCorreo
             // 
-            this.textBox7.Location = new System.Drawing.Point(21, 268);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 12;
+            this.txtCorreo.Location = new System.Drawing.Point(21, 268);
+            this.txtCorreo.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.Size = new System.Drawing.Size(130, 20);
+            this.txtCorreo.TabIndex = 12;
+            // 
+            // btnRegistrar
+            // 
+            this.btnRegistrar.Location = new System.Drawing.Point(21, 316);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrar.TabIndex = 13;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // Sign_In
             // 
@@ -258,6 +267,7 @@
             this.ClientSize = new System.Drawing.Size(468, 450);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.flowLayoutPanel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Sign_In";
             this.Text = "Sign_In";
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -278,20 +288,21 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtPrimerNombre;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtSegundoNombre;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtPrimerApellido;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtSegundoApellido;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txtCorreo;
+        private System.Windows.Forms.Button btnRegistrar;
     }
 }
