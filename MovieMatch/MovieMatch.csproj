@@ -162,7 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
-      <Project>{c84f9e45-76c8-44a7-b0eb-29d600a9ce20}</Project>
+      <Project>{915317bb-a146-485c-b482-e44c17c18e40}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
   </ItemGroup>
