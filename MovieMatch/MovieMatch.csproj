@@ -162,11 +162,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
-<<<<<<< HEAD
       <Project>{63a9dced-eca4-41a2-b4f1-8242294ee9b4}</Project>
-=======
       <Project>{915317bb-a146-485c-b482-e44c17c18e40}</Project>
->>>>>>> 447458bd33c78773715b8f31259731d66c9c3dda
       <Name>Entidades</Name>
     </ProjectReference>
   </ItemGroup>

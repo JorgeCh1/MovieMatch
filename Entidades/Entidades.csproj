@@ -4,11 +4,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-<<<<<<< HEAD
     <ProjectGuid>{63A9DCED-ECA4-41A2-B4F1-8242294EE9B4}</ProjectGuid>
-=======
-    <ProjectGuid>{915317BB-A146-485C-B482-E44C17C18E40}</ProjectGuid>
->>>>>>> 447458bd33c78773715b8f31259731d66c9c3dda
+    <ProjectGuid>{63A9DCED-ECA4-41A2-B4F1-8242294EE9B4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Entidades</RootNamespace>
     <AssemblyName>Entidades</AssemblyName>
