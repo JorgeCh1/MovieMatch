@@ -13,7 +13,6 @@ namespace Entidades
         }
 
         public virtual DbSet<Comentarios> Comentarios { get; set; }
-        public virtual DbSet<Genero> Genero { get; set; }
         public virtual DbSet<Peliculas> Peliculas { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
 

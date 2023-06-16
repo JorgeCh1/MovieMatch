@@ -29,7 +29,7 @@ namespace Entidades
         public string PrimerApellido { get; set; }
 
         [StringLength(50)]
-        public string SegunoApellido { get; set; }
+        public string SegundoApellido { get; set; }
 
         [Required]
         [StringLength(50)]

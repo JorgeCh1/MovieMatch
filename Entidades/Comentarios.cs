@@ -12,7 +12,7 @@ namespace Entidades
         [Column(Order = 0)]
         public int idComentarios { get; set; }
 
-        [StringLength(2000)]
+        [StringLength(4000)]
         public string Comentario { get; set; }
 
         [Key]

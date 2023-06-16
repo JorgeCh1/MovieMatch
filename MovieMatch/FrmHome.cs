@@ -29,7 +29,7 @@ namespace MovieMatch
             InitializeComponent();
         }
 
-        private void FrmHome_Load(object sender, EventArgs e)
+        private async void FrmHome_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
 

@@ -36,6 +36,8 @@ namespace Entidades
         [StringLength(100)]
         public string Poster { get; set; }
 
+        public byte? Match { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comentarios> Comentarios { get; set; }
     }
