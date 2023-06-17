@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MovieMatch
 {
@@ -22,6 +23,39 @@ namespace MovieMatch
         }
 
         public async Task<List<Movie>> ObtenerTodasLasPeliculas()
+        {
+            List<Movie> allMovies = new List<Movie>();
+
+            try
+            {
+                int pagina = 1;
+                string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
+
+                    List<Movie> movies = movieResponse.Results;
+                    allMovies.AddRange(movies);
+                }
+                else
+                {
+                    // Manejar el caso de error en la solicitud HTTP
+                    throw new Exception("Error al obtener las películas");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las películas: " + ex.Message);
+            }
+
+            return allMovies;
+        }
+
+
+        /*public async Task<List<Movie>> ObtenerTodasLasPeliculas()
         {
             List<Movie> allMovies = new List<Movie>();
 
@@ -66,7 +100,25 @@ namespace MovieMatch
 
 
             return allMovies;
-        }
-    }
+        }*/
 
+        public async Task<List<Genre>> ObtenerTodosLosGeneros()
+        {
+            string url = $"https://api.themoviedb.org/3/genre/movie/list?api_key={apiKey}";
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                GenreResponse genreResponse = JsonConvert.DeserializeObject<GenreResponse>(json);
+                return genreResponse.Genres;
+            }
+            else
+            {
+                throw new Exception("Error al obtener los géneros de películas.");
+            }
+        }
+
+    }
 }
+

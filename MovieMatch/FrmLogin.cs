@@ -38,7 +38,7 @@ namespace MovieMatch
                 if (lst.Count() > 0 )
                 {
                     this.Hide();
-                    FrmHome home = new FrmHome();
+                    FrmSidebar home = new FrmSidebar();
                     home.Show();
                 }
                 else

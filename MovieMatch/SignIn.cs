@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,15 +32,36 @@ namespace MovieMatch
                     PrimerNombre = txtPrimerNombre.Text,
                     SegundoNombre = txtSegundoNombre.Text,
                     PrimerApellido = txtPrimerApellido.Text,
-                    SegunoApellido = txtSegundoApellido.Text,
+                    SegundoApellido = txtSegundoApellido.Text,
                     Usuario = txtUsuario.Text,
                     Clave = sPass,
-
-                    //FechaCreacionCuenta = now
+                    CorreoElectronico = txtCorreo.Text,
+                    FechaCreacionCuenta = now
                 };
 
                 context.Usuarios.Add(us);
-                context.SaveChanges();
+
+                try
+                {
+                    context.SaveChanges();
+                    this.Hide();
+                    FrmLogin loginForm = new FrmLogin();
+                    loginForm.Show();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationError in ex.EntityValidationErrors)
+                    {
+                        var entityEntry = entityValidationError.Entry;
+
+                        Console.WriteLine($"Validation errors for entity: {entityEntry.Entity.GetType().Name}");
+
+                        foreach (var validationError in entityValidationError.ValidationErrors)
+                        {
+                            Console.WriteLine($"Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}");
+                        }
+                    }
+                }
             }
         }
     }

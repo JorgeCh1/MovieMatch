@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +19,8 @@ namespace MovieMatch
     public partial class FrmHome : Form
     {
         private List<Movie> allMovies; // Lista que contiene todas las películas sin filtrar
-        
+
+
         // Crear una instancia de ApiManager con la URL y la clave de API
         ApiManager apiManager = new ApiManager("https://api.themoviedb.org/3/movie/popular", "9487ca9a0bad24fd5b3199338e11662e");
 
@@ -27,17 +29,15 @@ namespace MovieMatch
             InitializeComponent();
         }
 
-        private async void FrmHome_Load(object sender, EventArgs e)
+        private void FrmHome_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
 
-            // Obtener todas las películas desde la API
-            allMovies = await apiManager.ObtenerTodasLasPeliculas();
-
-            MostrarPelículas(allMovies);
+            txtSearch.Text = ""; // Establecer el TextBox en una cadena vacía al cargar el formulario
         }
 
-        private async void MostrarPelículas(List<Movie> movies)
+
+        private async void MostrarPelículas(List<Movie> movies, List<Genre> genres)
         {
             try
             {
@@ -52,20 +52,25 @@ namespace MovieMatch
                 };
                 lvAllMovies.LargeImageList = imageListLarge;
 
-                // Crear ImageList para almacenar las imágenes en miniatura
-                ImageList imageListSmall = new ImageList
-                {
-                    ImageSize = new Size(100, 150)
-                };
-                lvAllMovies.SmallImageList = imageListSmall;
-
                 // Agregar las películas al ListView
                 foreach (Movie movie in allMovies)
                 {
                     // Descargar la imagen del póster y agregarla al ImageList
                     Image posterImage = await DownloadPosterImage(movie.Poster);
                     imageListLarge.Images.Add(posterImage);
-                    imageListSmall.Images.Add(posterImage);
+
+                    List<string> genreNames = new List<string>();
+                    foreach (int genreId in movie.GenreIds)
+                    {
+                        Genre genre = genres.FirstOrDefault(g => g.Id == genreId);
+                        if (genre != null)
+                        {
+                            genreNames.Add(genre.Name);
+                        }
+                    }
+
+                    // Asignar los nombres de los géneros a la propiedad Genres de la película
+                    movie.Genres = genreNames;
 
                     // Crear un ListViewItem con los detalles de la película
                     ListViewItem item = new ListViewItem(movie.Title)
@@ -79,11 +84,12 @@ namespace MovieMatch
                     lvAllMovies.Items.Add(item);
 
                     // Debug
-                    Debug.WriteLine($"Película: {movie.Title}, Año: {movie.ReleaseDate}, Resumen: {movie.Overview}, Calificación: {movie.Rating}");
+                    string genresd = string.Join(", ", movie.Genres);
+                    Debug.WriteLine($"Géneros: {genresd}, Película: {movie.Title}, Año: {movie.ReleaseDate}, Resumen: {movie.Overview}, Calificación: {movie.Rating}");
                 }
 
                 // Ajustar el tamaño de visualización de las imágenes en el ListView
-                int iconSize = 150; // Tamaño deseado para la visualización de las imágenes en el ListView
+                int iconSize = 200; // Tamaño deseado para la visualización de las imágenes en el ListView
                 IntPtr wParam = new IntPtr(iconSize);
                 IntPtr lParam = new IntPtr(iconSize);
                 SendMessage(lvAllMovies.Handle, LVM_SETICONSPACING, wParam, lParam);
@@ -145,16 +151,69 @@ namespace MovieMatch
             }
         }
 
-        //Filtro aún no funciona
+
+
+        private async void FilterMoviesByTitle(string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                // Obtener todas las películas desde la API
+                allMovies = await apiManager.ObtenerTodasLasPeliculas();
+
+                // Obtener todos los géneros desde la API
+                List<Genre> allGenres = await apiManager.ObtenerTodosLosGeneros();
+
+                MostrarPelículas(allMovies, allGenres);
+            }
+            else
+            {
+                // Filtra las películas por título y actualiza la interfaz de usuario con los resultados
+                var filteredMovie = allMovies.FirstOrDefault(movie => movie.Title.ToLower() == keyword.ToLower());
+                List<Genre> allGenres = await apiManager.ObtenerTodosLosGeneros();
+
+                lvAllMovies.Items.Clear();
+                if (filteredMovie != null)
+                {
+                    lvAllMovies.View = View.LargeIcon;
+
+                    // Crear ImageList para almacenar las imágenes de los pósters
+                    ImageList imageListLarge = new ImageList
+                    {
+                        ImageSize = new Size(200, 250)
+                    };
+                    lvAllMovies.LargeImageList = imageListLarge;
+
+                    Image posterImage = await DownloadPosterImage(filteredMovie.Poster);
+                    imageListLarge.Images.Add(posterImage);
+
+                    List<string> genreNames = new List<string>();
+                    foreach (int genreId in filteredMovie.GenreIds)
+                    {
+                        Genre genre = allGenres.FirstOrDefault(g => g.Id == genreId);
+                        if (genre != null)
+                        {
+                            genreNames.Add(genre.Name);
+                        }
+                    }
+
+                    ListViewItem item = new ListViewItem(filteredMovie.Title)
+                    {
+                        Tag = filteredMovie,
+                        ForeColor = Color.White,
+                        ImageIndex = imageListLarge.Images.Count - 1
+                    };
+
+                    lvAllMovies.Items.Add(item);
+
+                    return; // Detener la ejecución del método después de agregar la película encontrada
+                }
+            }
+        }
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            string searchText = txtSearch.Text.Trim().ToLower();
-
-            // Filtrar las películas por título según el texto de búsqueda
-            List<Movie> filteredMovies = allMovies.Where(movie => movie.Title.ToLower().Contains(searchText)).ToList();
-
-            // Mostrar las películas filtradas en el ListView
-            MostrarPelículas(filteredMovies);
+            string searchText = txtSearch.Text.Trim();
+            FilterMoviesByTitle(searchText);
         }
     }
 }
