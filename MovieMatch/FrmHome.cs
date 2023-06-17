@@ -37,7 +37,7 @@ namespace MovieMatch
 
         private async void MostrarPelículasRecomendadas(List<Movie> movies, List<Genre> genres)
         {
-            try
+            /*try
             {
                 // Limpiar el ListView y configurar el modo de visualización como Tile
                 lvRMovies.Items.Clear();
@@ -106,7 +106,7 @@ namespace MovieMatch
             {
                 // Manejar cualquier excepción
                 MessageBox.Show("Ocurrió un error al obtener las películasd: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
         }
 
 

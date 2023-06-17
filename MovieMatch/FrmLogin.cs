@@ -18,6 +18,12 @@ namespace MovieMatch
             InitializeComponent();
         }
 
+        public static class LoginInfo
+        {
+            public static string UserID;
+        }
+
+
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -46,16 +52,6 @@ namespace MovieMatch
                     MessageBox.Show("Usuario No Esta Registrado o Clave incorrecta");
                 }
             }
-
-        }
-
-        private void btnRegistrar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
 
         }
 

@@ -58,7 +58,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(43)))), ((int)(((byte)(73)))));
             this.panel1.Controls.Add(this.pbCerrar);
             this.panel1.Controls.Add(this.pbMinimizar);
             this.panel1.Controls.Add(this.btnMenu);
@@ -70,7 +70,7 @@
             // 
             // pbCerrar
             // 
-            this.pbCerrar.BackColor = System.Drawing.Color.Gray;
+            this.pbCerrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(43)))), ((int)(((byte)(73)))));
             this.pbCerrar.Image = ((System.Drawing.Image)(resources.GetObject("pbCerrar.Image")));
             this.pbCerrar.Location = new System.Drawing.Point(1004, 13);
             this.pbCerrar.Margin = new System.Windows.Forms.Padding(6);
@@ -83,7 +83,7 @@
             // 
             // pbMinimizar
             // 
-            this.pbMinimizar.BackColor = System.Drawing.Color.Gray;
+            this.pbMinimizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(43)))), ((int)(((byte)(73)))));
             this.pbMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("pbMinimizar.Image")));
             this.pbMinimizar.Location = new System.Drawing.Point(964, 13);
             this.pbMinimizar.Margin = new System.Windows.Forms.Padding(6);

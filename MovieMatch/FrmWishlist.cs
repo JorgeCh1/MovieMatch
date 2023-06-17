@@ -111,9 +111,9 @@ namespace MovieMatch
 
         private List<Peliculas> ObtenerPeliculasDesdeBaseDeDatos()
         {
-            using (var dbContext = new EntityContext())
+            using (var context = new EntityContext())
             {
-                return dbContext.Peliculas.ToList();
+                return context.Peliculas.ToList();
             }
         }
 
