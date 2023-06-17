@@ -35,7 +35,7 @@ namespace MovieMatch
                           select d;
 
 
-                if (lst.Count() > 0 )
+                if (lst.Count() > 0)
                 {
                     this.Hide();
                     FrmSidebar home = new FrmSidebar();
@@ -51,9 +51,30 @@ namespace MovieMatch
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblRegistrar(object sender, EventArgs e)
+        {
             this.Hide();
             Sign_In sign = new Sign_In();
             sign.Show();
+        }
+
+        private void pbCerrar_Click(object sender, EventArgs e)
+        {
+
+            Application.Exit();
+        }
+
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

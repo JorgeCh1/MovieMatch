@@ -20,7 +20,6 @@ namespace MovieMatch
     {
         private List<Movie> allMovies; // Lista que contiene todas las películas sin filtrar
 
-
         // Crear una instancia de ApiManager con la URL y la clave de API
         ApiManager apiManager = new ApiManager("https://api.themoviedb.org/3/movie/popular", "9487ca9a0bad24fd5b3199338e11662e");
 
@@ -35,6 +34,81 @@ namespace MovieMatch
 
             txtSearch.Text = ""; // Establecer el TextBox en una cadena vacía al cargar el formulario
         }
+
+        private async void MostrarPelículasRecomendadas(List<Movie> movies, List<Genre> genres)
+        {
+            try
+            {
+                // Limpiar el ListView y configurar el modo de visualización como Tile
+                lvRMovies.Items.Clear();
+                lvRMovies.View = View.Tile;
+
+                // Crear ImageList para almacenar las imágenes de los pósters
+                ImageList imageListLarge = new ImageList
+                {
+                    ImageSize = new Size(200, 250)
+                };
+                lvRMovies.LargeImageList = imageListLarge;
+
+                // Agregar las películas al ListView
+                foreach (Movie movie in allMovies)
+                {
+                    // Descargar la imagen del póster y agregarla al ImageList
+                    Image posterImage = await DownloadPosterImage(movie.Poster);
+                    imageListLarge.Images.Add(posterImage);
+
+                    List<string> genreNames = new List<string>();
+                    foreach (int genreId in movie.GenreIds)
+                    {
+                        Genre genre = genres.FirstOrDefault(g => g.Id == genreId);
+                        if (genre != null)
+                        {
+                            genreNames.Add(genre.Name);
+                        }
+                    }
+
+                    // Asignar los nombres de los géneros a la propiedad Genres de la película
+                    movie.Genres = genreNames;
+
+                    // Crear un ListViewItem con los detalles de la película
+                    ListViewItem item = new ListViewItem(movie.Title)
+                    {
+                        Tag = movie, // Asignar el objeto Movie al Tag del ListViewItem
+                        ForeColor = Color.White,
+                        ImageIndex = imageListLarge.Images.Count - 1
+                    };
+
+                    // Agregar el ListViewItem al ListView
+                    lvRMovies.Items.Add(item);
+
+                    // Debug
+                    string genresd = string.Join(", ", movie.Genres);
+                    Debug.WriteLine($"Géneros: {genresd}, Película: {movie.Title}, Año: {movie.ReleaseDate}, Resumen: {movie.Overview}, Calificación: {movie.Rating}");
+                }
+
+                // Ajustar el tamaño de visualización de las imágenes en el ListView
+                int iconSize = 200; // Tamaño deseado para la visualización de las imágenes en el ListView
+                IntPtr wParam = new IntPtr(iconSize);
+                IntPtr lParam = new IntPtr(iconSize);
+                SendMessage(lvRMovies.Handle, LVM_SETICONSPACING, wParam, lParam);
+
+                // Ajustar el ancho de las columnas al contenido
+                lvRMovies.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+                // Ajustar el ancho de las columnas para lograr el efecto horizontal
+                lvRMovies.Columns[0].Width = lvRMovies.Width - SystemInformation.VerticalScrollBarWidth;
+
+                // Ocultar los encabezados de columna
+                lvRMovies.HeaderStyle = ColumnHeaderStyle.None;
+
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción
+                MessageBox.Show("Ocurrió un error al obtener las películasd: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
         private async void MostrarPelículas(List<Movie> movies, List<Genre> genres)
@@ -164,6 +238,7 @@ namespace MovieMatch
                 List<Genre> allGenres = await apiManager.ObtenerTodosLosGeneros();
 
                 MostrarPelículas(allMovies, allGenres);
+                MostrarPelículasRecomendadas(allMovies, allGenres);
             }
             else
             {
@@ -202,7 +277,6 @@ namespace MovieMatch
                         ForeColor = Color.White,
                         ImageIndex = imageListLarge.Images.Count - 1
                     };
-
                     lvAllMovies.Items.Add(item);
 
                     return; // Detener la ejecución del método después de agregar la película encontrada
@@ -214,6 +288,29 @@ namespace MovieMatch
         {
             string searchText = txtSearch.Text.Trim();
             FilterMoviesByTitle(searchText);
+        }
+
+        private async void lvRMovies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvRMovies.SelectedItems.Count > 0)
+            {
+                // Obtener el elemento seleccionado
+                ListViewItem selectedItem = lvRMovies.SelectedItems[0];
+
+                // Obtener los datos de la película desde la propiedad Tag
+                Movie movie = (Movie)selectedItem.Tag;
+
+                // Descargar la imagen del póster
+                Image posterImage = await DownloadPosterImage(movie.Poster);
+
+                // Crear una instancia del formulario de detalles y pasar los datos y la imagen del póster
+                FrmMovieDetails movieDetailsForm = new FrmMovieDetails(movie, posterImage);
+
+                // Configurar el formulario de detalles como formulario secundario del formulario principal
+                movieDetailsForm.MdiParent = this.MdiParent;
+                movieDetailsForm.Dock = DockStyle.Fill;
+                movieDetailsForm.Show();
+            }
         }
     }
 }

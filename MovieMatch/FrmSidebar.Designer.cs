@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSidebar));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pbCerrar = new System.Windows.Forms.PictureBox();
+            this.pbMinimizar = new System.Windows.Forms.PictureBox();
             this.btnMenu = new System.Windows.Forms.PictureBox();
             this.sidebar = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,6 +46,8 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.sidebarTransition = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMenu)).BeginInit();
             this.sidebar.SuspendLayout();
             this.pnHome.SuspendLayout();
@@ -55,12 +59,40 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.pbCerrar);
+            this.panel1.Controls.Add(this.pbMinimizar);
             this.panel1.Controls.Add(this.btnMenu);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1035, 35);
             this.panel1.TabIndex = 0;
+            // 
+            // pbCerrar
+            // 
+            this.pbCerrar.BackColor = System.Drawing.Color.Gray;
+            this.pbCerrar.Image = ((System.Drawing.Image)(resources.GetObject("pbCerrar.Image")));
+            this.pbCerrar.Location = new System.Drawing.Point(1004, 13);
+            this.pbCerrar.Margin = new System.Windows.Forms.Padding(6);
+            this.pbCerrar.Name = "pbCerrar";
+            this.pbCerrar.Size = new System.Drawing.Size(16, 16);
+            this.pbCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbCerrar.TabIndex = 14;
+            this.pbCerrar.TabStop = false;
+            this.pbCerrar.Click += new System.EventHandler(this.pbCerrar_Click);
+            // 
+            // pbMinimizar
+            // 
+            this.pbMinimizar.BackColor = System.Drawing.Color.Gray;
+            this.pbMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("pbMinimizar.Image")));
+            this.pbMinimizar.Location = new System.Drawing.Point(964, 13);
+            this.pbMinimizar.Margin = new System.Windows.Forms.Padding(6);
+            this.pbMinimizar.Name = "pbMinimizar";
+            this.pbMinimizar.Size = new System.Drawing.Size(16, 16);
+            this.pbMinimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbMinimizar.TabIndex = 13;
+            this.pbMinimizar.TabStop = false;
+            this.pbMinimizar.Click += new System.EventHandler(this.pbMinimizar_Click);
             // 
             // btnMenu
             // 
@@ -90,7 +122,7 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Minecraft", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(3, 50);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 50, 3, 0);
@@ -198,6 +230,7 @@
             this.btnLogout.Text = "       Log Out";
             this.btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // sidebarTransition
             // 
@@ -214,9 +247,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.IsMdiContainer = true;
             this.Name = "FrmSidebar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FrmSidebar_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMenu)).EndInit();
             this.sidebar.ResumeLayout(false);
             this.pnHome.ResumeLayout(false);
@@ -242,6 +279,8 @@
         private System.Windows.Forms.Panel pnLogout;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Timer sidebarTransition;
+        internal System.Windows.Forms.PictureBox pbCerrar;
+        internal System.Windows.Forms.PictureBox pbMinimizar;
     }
 }
 
