@@ -136,5 +136,24 @@ namespace MovieMatch
         {
             profile = null;
         }
+
+        private void pbCerrar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FrmLogin loginForm = new FrmLogin();
+            loginForm.Show();
+        }
+
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FrmLogin loginForm = new FrmLogin();
+            loginForm.Show();
+        }
     }
 }

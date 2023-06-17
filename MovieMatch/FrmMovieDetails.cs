@@ -44,13 +44,15 @@ namespace MovieMatch
             pbPoster.SizeMode = PictureBoxSizeMode.StretchImage; // Utiliza el modo de ajuste Zoom para mostrar la imagen completa
 
             // Establecer el tamaño deseado para el PictureBox
-            int pictureBoxWidth = 200; // Ancho deseado del PictureBox
-            int pictureBoxHeight = 250; // Alto deseado del PictureBox
+            int pictureBoxWidth = 300; // Ancho deseado del PictureBox
+            int pictureBoxHeight = 350; // Alto deseado del PictureBox
             pbPoster.Size = new Size(pictureBoxWidth, pictureBoxHeight);
 
             // Ajustar el tamaño del control lblOverview al tamaño del formulario
             lblOverview.AutoSize = true;
-            lblOverview.MaximumSize = new Size(this.ClientSize.Width - lblOverview.Left * 2, 0);
+            lblOverview.MaximumSize = new Size(this.ClientSize.Width - lblOverview.Left * 1, 0);
+            lblTitle.AutoSize = true;
+            lblTitle.MaximumSize = new Size(this.ClientSize.Width - lblTitle.Left * 1, 0);
 
             // Verificar si la película existe en la base de datos
             using (var dbContext = new EntityContext())
@@ -145,6 +147,7 @@ namespace MovieMatch
             }
         }
 
+    
     }
 
 }

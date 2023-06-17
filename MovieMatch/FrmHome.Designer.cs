@@ -34,7 +34,7 @@
             // 
             // lvAllMovies
             // 
-            this.lvAllMovies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            this.lvAllMovies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
             this.lvAllMovies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvAllMovies.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lvAllMovies.HideSelection = false;
@@ -60,7 +60,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
             this.ClientSize = new System.Drawing.Size(972, 629);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lvAllMovies);
