@@ -76,11 +76,11 @@
             // lblOverview
             // 
             this.lblOverview.AutoSize = true;
-            this.lblOverview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOverview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOverview.ForeColor = System.Drawing.Color.White;
             this.lblOverview.Location = new System.Drawing.Point(495, 215);
             this.lblOverview.Name = "lblOverview";
-            this.lblOverview.Size = new System.Drawing.Size(73, 20);
+            this.lblOverview.Size = new System.Drawing.Size(78, 22);
             this.lblOverview.TabIndex = 2;
             this.lblOverview.Text = "Sinopsis";
             // 
