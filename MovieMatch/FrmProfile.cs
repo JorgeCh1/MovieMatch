@@ -5,7 +5,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Entity.Validation;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -102,16 +105,40 @@ namespace MovieMatch
                         usuario.SegundoApellido = txtSegundoApellido.Text;
                         usuario.CorreoElectronico = txtCorreo.Text;
 
+                        //// Convertir la imagen a un array de bytes
+                        //byte[] imagenBytes = null;
+                        //Image imagen = imgProfile.Image;
+                        //if (imagen != null)
+                        //{
+                        //    using (MemoryStream ms = new MemoryStream())
+                        //    {
+                        //        imagen.Save(ms, ImageFormat.Jpeg);
+                        //        imagenBytes = ms.ToArray();
+                        //    }
+                        //}
+
+                        //// Asignar la imagen al usuario
+                        //usuario.Imagen = imagenBytes;
+
                         try
                         {
                             // Guardar los cambios en la base de datos
                             context.SaveChanges();
                             MessageBox.Show("Usuario actualizado correctamente.");
                         }
-                        catch (Exception ex)
+                        catch (DbEntityValidationException ex)
                         {
-                            // Manejar errores o mostrar un mensaje de error
-                            MessageBox.Show("Error al actualizar el usuario: " + ex.Message);
+                            foreach (var entityValidationError in ex.EntityValidationErrors)
+                            {
+                                var entityEntry = entityValidationError.Entry;
+
+                                Console.WriteLine($"Validation errors for entity: {entityEntry.Entity.GetType().Name}");
+
+                                foreach (var validationError in entityValidationError.ValidationErrors)
+                                {
+                                    Console.WriteLine($"Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}");
+                                }
+                            }
                         }
                     }
                     else
