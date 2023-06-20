@@ -13,6 +13,7 @@ namespace MovieMatch
 {
     public partial class FrmLogin : Form
     {
+        bool error = false;
         public FrmLogin()
         {
             InitializeComponent();
@@ -27,35 +28,60 @@ namespace MovieMatch
         {
             string sPass = Encrypt.GetSHA256(txtPassword.Text.Trim());
 
-            using (Entidades.EntityContext context = new EntityContext())
+            if(txtUser.Text.Length == 0)
             {
-                var lst = from d in context.Usuarios
-                          where d.Usuario == txtUser.Text
-                          && d.Clave == sPass
-                          select d;
-
-
-                if (lst.Count() > 0)
-                {
-                    this.Hide();
-                    FrmSidebar home = new FrmSidebar();
-                    home.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Usuario No Esta Registrado o Clave incorrecta");
-                }
+                errorProviderUsuario.SetError(txtUser, "No puede estar vacio");
+                error = true;
+            }
+            else if (txtPassword.Text.Length == 0)
+            {
+                errorProviderContra.SetError(txtPassword, "No puede estar vacio");
+                error = true;
+            }
+            else
+            {
+                errorProviderUsuario.Clear();
+                errorProviderContra.Clear();
+                error = false;
             }
 
-        }
+            //if (txtPassword.Text.Length == 0)
+            //{
+            //    errorProviderContra.SetError(txtPassword, "No puede estar vacio");
+            //    error = true;
+            //}
+            //else
+            //{
+            //    errorProviderContra.Clear();
+            //    error = false;
+            //}
 
-        private void btnRegistrar_Click(object sender, EventArgs e)
-        {
+            if (error == true)
+            {
+                MessageBox.Show("hay campos vacios");
+            }
+            else
+            {
+                using (Entidades.EntityContext context = new EntityContext())
+                {
+                    var lst = from d in context.Usuarios
+                              where d.Usuario == txtUser.Text
+                              && d.Clave == sPass
+                              select d;
 
-        }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+                    if (lst.Count() > 0)
+                    {
+                        this.Hide();
+                        FrmSidebar home = new FrmSidebar();
+                        home.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Usuario No está Registrado o Clave incorrecta");
+                    }
+                }
+            }
 
         }
 
@@ -75,6 +101,11 @@ namespace MovieMatch
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
