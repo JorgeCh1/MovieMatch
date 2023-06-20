@@ -106,14 +106,15 @@ namespace MovieMatch
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
-        private const int LVM_SETICONSPACING = 0x1035;
+        const int LVM_FIRST = 0x1000;
+        const int LVM_SETICONSPACING = LVM_FIRST + 100;
 
 
         private List<Peliculas> ObtenerPeliculasDesdeBaseDeDatos()
         {
-            using (var dbContext = new EntityContext())
+            using (var context = new EntityContext())
             {
-                return dbContext.Peliculas.ToList();
+                return context.Peliculas.ToList();
             }
         }
 

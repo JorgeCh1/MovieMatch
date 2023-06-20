@@ -55,9 +55,9 @@ namespace MovieMatch
             lblTitle.MaximumSize = new Size(this.ClientSize.Width - lblTitle.Left * 1, 0);
 
             // Verificar si la película existe en la base de datos
-            using (var dbContext = new EntityContext())
+            using (var context = new EntityContext())
             {
-                bool exists = dbContext.Peliculas.Any(p => p.Titulo == selectedMovie.Title);
+                bool exists = context.Peliculas.Any(p => p.Titulo == selectedMovie.Title);
 
                 if (exists)
                 {
@@ -76,10 +76,10 @@ namespace MovieMatch
         {
             if (chkSaveMovie.Checked)
             {
-                using (var dbContext = new EntityContext())
+                using (var context = new EntityContext())
                 {
                     // Verificar si la película ya existe en la base de datos
-                    bool exists = dbContext.Peliculas.Any(p => p.Titulo == lblTitle.Text);
+                    bool exists = context.Peliculas.Any(p => p.Titulo == lblTitle.Text);
 
                     if (!exists)
                     {
@@ -101,12 +101,12 @@ namespace MovieMatch
                         pelicula.Genero = string.Join(", ", genreArray.Select(genre => genre.Trim()));
 
                         // Agregar la nueva entidad al contexto de la base de datos
-                        dbContext.Peliculas.Add(pelicula);
+                        context.Peliculas.Add(pelicula);
 
                         try
                         {
                             // Guardar los cambios en la base de datos
-                            dbContext.SaveChanges();
+                            context.SaveChanges();
                         }
                         catch (DbEntityValidationException ex)
                         {
@@ -131,15 +131,15 @@ namespace MovieMatch
             }
             else
             {
-                using (var dbContext = new EntityContext())
+                using (var context = new EntityContext())
                 {
                     // Eliminar la película de la base de datos si existe
-                    Peliculas pelicula = dbContext.Peliculas.FirstOrDefault(p => p.Titulo == lblTitle.Text);
+                    Peliculas pelicula = context.Peliculas.FirstOrDefault(p => p.Titulo == lblTitle.Text);
 
                     if (pelicula != null)
                     {
-                        dbContext.Peliculas.Remove(pelicula);
-                        dbContext.SaveChanges();
+                        context.Peliculas.Remove(pelicula);
+                        context.SaveChanges();
 
                         MessageBox.Show("Película eliminada de la base de datos.");
                     }

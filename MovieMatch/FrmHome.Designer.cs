@@ -83,12 +83,14 @@
             // lvRMovies
             // 
             this.lvRMovies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
+            this.lvRMovies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvRMovies.HideSelection = false;
             this.lvRMovies.Location = new System.Drawing.Point(15, 78);
             this.lvRMovies.Name = "lvRMovies";
-            this.lvRMovies.Size = new System.Drawing.Size(1074, 200);
+            this.lvRMovies.Size = new System.Drawing.Size(945, 200);
             this.lvRMovies.TabIndex = 4;
             this.lvRMovies.UseCompatibleStateImageBehavior = false;
+            this.lvRMovies.View = System.Windows.Forms.View.Tile;
             this.lvRMovies.SelectedIndexChanged += new System.EventHandler(this.lvRMovies_SelectedIndexChanged);
             // 
             // FrmHome

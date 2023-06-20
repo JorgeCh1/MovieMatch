@@ -36,6 +36,7 @@
             // lvWishlist
             // 
             this.lvWishlist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
+            this.lvWishlist.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvWishlist.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvWishlist.HideSelection = false;
             this.lvWishlist.Location = new System.Drawing.Point(0, 0);

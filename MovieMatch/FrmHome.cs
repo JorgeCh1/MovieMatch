@@ -37,7 +37,7 @@ namespace MovieMatch
 
         private async void MostrarPelículasRecomendadas(List<Movie> movies, List<Genre> genres)
         {
-            try
+            /*try
             {
                 // Limpiar el ListView y configurar el modo de visualización como Tile
                 lvRMovies.Items.Clear();
@@ -106,7 +106,7 @@ namespace MovieMatch
             {
                 // Manejar cualquier excepción
                 MessageBox.Show("Ocurrió un error al obtener las películasd: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
         }
 
 
@@ -152,7 +152,7 @@ namespace MovieMatch
                         Tag = movie, // Asignar el objeto Movie al Tag del ListViewItem
                         ForeColor = Color.White,
                         ImageIndex = imageListLarge.Images.Count - 1
-                    };
+                    }; 
 
                     // Agregar el ListViewItem al ListView
                     lvAllMovies.Items.Add(item);
@@ -200,7 +200,8 @@ namespace MovieMatch
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
-        private const int LVM_SETICONSPACING = 0x1035;
+        const int LVM_FIRST = 0x1000;
+        const int LVM_SETICONSPACING = LVM_FIRST + 100;
 
         private async void lvAllMovies_SelectedIndexChanged(object sender, EventArgs e)
         {
