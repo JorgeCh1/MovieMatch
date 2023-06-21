@@ -118,6 +118,10 @@ namespace MovieMatch
                             item.Focus();
                             error = true; break;
                         }
+                        else
+                        {
+                            error = false;
+                        }
                     }
 
                 }
@@ -163,6 +167,10 @@ namespace MovieMatch
             {
                 errorProvider.SetError(txtPrimerNombre, "Debe ser alfabetico");
                 error = true;
+            } 
+            else
+            {
+                error = false;
             }
 
         }
@@ -175,6 +183,10 @@ namespace MovieMatch
                 errorProvider.SetError(txtPrimerApellido, "Debe ser alfabetico");
                 error = true;
             }
+            else
+            {
+                error = false;
+            }
         }
 
         private void txtCorreo_TextChanged(object sender, EventArgs e)
@@ -185,6 +197,10 @@ namespace MovieMatch
                 errorProvider.SetError(txtCorreo, "Debe ser un formato de correo (user@correo.com)");
                 error = true;
             }
+            else
+            {
+                error = false;
+            }
         }
 
         private void txtClave_TextChanged(object sender, EventArgs e)
@@ -194,6 +210,10 @@ namespace MovieMatch
             {
                 errorProvider.SetError(txtClave, "Debe ser alfabetico");
                 error = true;
+            }
+            else
+            {
+                error = false;
             }
         }
 
