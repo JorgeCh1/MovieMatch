@@ -11,19 +11,21 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MovieMatch
 {
-    public partial class FrmHome : Form
+    public partial class FrmDiscover : Form
     {
         private List<Movie> allMovies; // Lista que contiene todas las películas sin filtrar
 
         // Crear una instancia de ApiManager con la URL y la clave de API
         ApiManager apiManager = new ApiManager("https://api.themoviedb.org/3/movie/popular", "9487ca9a0bad24fd5b3199338e11662e");
+        WaitFormFunc waitForm = new WaitFormFunc();
 
-        public FrmHome()
+        public FrmDiscover()
         {
             InitializeComponent();
         }
@@ -33,6 +35,7 @@ namespace MovieMatch
             this.ControlBox = false;
 
             txtSearch.Text = ""; // Establecer el TextBox en una cadena vacía al cargar el formulario
+
         }
 
         private async void MostrarPelículasRecomendadas(List<Movie> movies, List<Genre> genres)
@@ -115,6 +118,9 @@ namespace MovieMatch
         {
             try
             {
+                waitForm.Show(this);
+                Thread.Sleep(5000);
+
                 // Limpiar el ListView y configurar el modo de visualización como cartas (LargeIcon)
                 lvAllMovies.Items.Clear();
                 lvAllMovies.View = View.LargeIcon;
@@ -152,8 +158,9 @@ namespace MovieMatch
                         Tag = movie, // Asignar el objeto Movie al Tag del ListViewItem
                         ForeColor = Color.White,
                         ImageIndex = imageListLarge.Images.Count - 1
-                    }; 
+                    };
 
+                    waitForm.Close();
                     // Agregar el ListViewItem al ListView
                     lvAllMovies.Items.Add(item);
 

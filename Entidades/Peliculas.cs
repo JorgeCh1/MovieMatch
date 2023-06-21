@@ -12,6 +12,7 @@ namespace Entidades
         public Peliculas()
         {
             Comentarios = new HashSet<Comentarios>();
+            Usuarios = new HashSet<Usuarios>();
         }
 
         [Key]
@@ -25,20 +26,22 @@ namespace Entidades
         [StringLength(1000)]
         public string Sinopsis { get; set; }
 
-        [StringLength(60)]
-        public string Genero { get; set; }
-
         public double? Rating { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? FechaLanzamiento { get; set; }
 
         [StringLength(100)]
+        public string Generos { get; set; }
+
         public string Poster { get; set; }
 
         public byte? Match { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comentarios> Comentarios { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuarios> Usuarios { get; set; }
     }
 }

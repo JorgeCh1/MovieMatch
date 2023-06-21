@@ -16,6 +16,8 @@ namespace MovieMatch
     {
         private Movie selectedMovie;
         private Image posterImage;
+        int userId = UserContext.LoggedUserId;
+
 
 
         public FrmMovieDetails(Movie movie, Image poster)
@@ -74,12 +76,14 @@ namespace MovieMatch
 
         private void chkSaveMovie_CheckedChanged_1(object sender, EventArgs e)
         {
+            string titulo = lblTitle.Text;
+
             if (chkSaveMovie.Checked)
             {
                 using (var context = new EntityContext())
                 {
                     // Verificar si la película ya existe en la base de datos
-                    bool exists = context.Peliculas.Any(p => p.Titulo == lblTitle.Text);
+                    bool exists = context.Peliculas.Any(p => p.Titulo == titulo);
 
                     if (!exists)
                     {
@@ -98,7 +102,7 @@ namespace MovieMatch
 
                         string[] genreArray = lblGenere.Text.Split(',');
 
-                        pelicula.Genero = string.Join(", ", genreArray.Select(genre => genre.Trim()));
+                        pelicula.Generos = string.Join(", ", genreArray.Select(genre => genre.Trim()));
 
                         // Agregar la nueva entidad al contexto de la base de datos
                         context.Peliculas.Add(pelicula);
@@ -107,7 +111,17 @@ namespace MovieMatch
                         {
                             // Guardar los cambios en la base de datos
                             context.SaveChanges();
+
+                            // Obtener el usuario actual
+                            Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
+
+                            // Establecer la relación entre el usuario y la película
+                            usuario.Peliculas.Add(pelicula);
+
+                            // Guardar los cambios en la base de datos para insertar la relación
+                            context.SaveChanges();
                         }
+
                         catch (DbEntityValidationException ex)
                         {
                             // Recorrer los errores de validación
@@ -133,21 +147,32 @@ namespace MovieMatch
             {
                 using (var context = new EntityContext())
                 {
-                    // Eliminar la película de la base de datos si existe
-                    Peliculas pelicula = context.Peliculas.FirstOrDefault(p => p.Titulo == lblTitle.Text);
+                    // Obtener el usuario actual
+                    Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
+
+                    // Obtener la película actual
+                    Peliculas pelicula = usuario.Peliculas.FirstOrDefault(p => p.Titulo == titulo);
+
 
                     if (pelicula != null)
                     {
                         context.Peliculas.Remove(pelicula);
-                        context.SaveChanges();
-
-                        MessageBox.Show("Película eliminada de la base de datos.");
+                        try
+                {
+                    // Guardar los cambios en la base de datos para eliminar la relación
+                    context.SaveChanges();
+                    MessageBox.Show("Película eliminada de la lista del usuario.");
+                }
+                catch
+                {
+                    MessageBox.Show("Error al eliminar la película de la lista del usuario.");
+                }
                     }
                 }
             }
         }
 
-    
+
     }
 
 }

@@ -23,6 +23,11 @@ namespace Entidades
                 .WithRequired(e => e.Peliculas)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Peliculas>()
+                .HasMany(e => e.Usuarios)
+                .WithMany(e => e.Peliculas)
+                .Map(m => m.ToTable("PeliculasUsuarios").MapLeftKey("IdPelicula").MapRightKey("IdUsuario"));
+
             modelBuilder.Entity<Usuarios>()
                 .HasMany(e => e.Comentarios)
                 .WithRequired(e => e.Usuarios)

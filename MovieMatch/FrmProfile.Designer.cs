@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProfile));
             this.btnGuardar = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtCorreo = new System.Windows.Forms.TextBox();
@@ -235,6 +236,7 @@
             this.Controls.Add(this.txtPrimerNombre);
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmProfile";
             this.Text = "Profile";
             this.Load += new System.EventHandler(this.FrmProfile_Load);

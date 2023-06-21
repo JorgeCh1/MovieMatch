@@ -12,6 +12,7 @@ namespace Entidades
         public Usuarios()
         {
             Comentarios = new HashSet<Comentarios>();
+            Peliculas = new HashSet<Peliculas>();
         }
 
         [Key]
@@ -46,10 +47,12 @@ namespace Entidades
         [Column(TypeName = "date")]
         public DateTime FechaCreacionCuenta { get; set; }
 
-        [MaxLength(200)]
         public byte[] Imagen { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comentarios> Comentarios { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Peliculas> Peliculas { get; set; }
     }
 }

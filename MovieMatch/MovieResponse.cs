@@ -7,6 +7,11 @@ using Newtonsoft.Json;
 
 namespace MovieMatch
 {
+    public static class UserContext
+    {
+        public static int LoggedUserId { get; set; }
+    }
+
     public class MovieResponse
     {
         [JsonProperty("results")]

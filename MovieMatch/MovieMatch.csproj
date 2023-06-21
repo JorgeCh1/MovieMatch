@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Blue_Movies_alt_folder_12376.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -62,17 +65,17 @@
   <ItemGroup>
     <Compile Include="ApiManager.cs" />
     <Compile Include="Encrypt.cs" />
-    <Compile Include="FrmHome.cs">
+    <Compile Include="FrmDiscover.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmHome.Designer.cs">
-      <DependentUpon>FrmHome.cs</DependentUpon>
+    <Compile Include="FrmDiscover.Designer.cs">
+      <DependentUpon>FrmDiscover.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSidebar.cs">
+    <Compile Include="FrmMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSidebar.Designer.cs">
-      <DependentUpon>FrmSidebar.cs</DependentUpon>
+    <Compile Include="FrmMainMenu.Designer.cs">
+      <DependentUpon>FrmMainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
@@ -96,11 +99,11 @@
     <Compile Include="MovieResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FrmWishlist.cs">
+    <Compile Include="FrmFavorites.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmWishlist.Designer.cs">
-      <DependentUpon>FrmWishlist.cs</DependentUpon>
+    <Compile Include="FrmFavorites.Designer.cs">
+      <DependentUpon>FrmFavorites.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmRegister.cs">
       <SubType>Form</SubType>
@@ -108,23 +111,30 @@
     <Compile Include="FrmRegister.Designer.cs">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FrmHome.resx">
-      <DependentUpon>FrmHome.cs</DependentUpon>
+    <Compile Include="WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitForm.Designer.cs">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaitFormFunc.cs" />
+    <EmbeddedResource Include="FrmDiscover.resx">
+      <DependentUpon>FrmDiscover.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmMainMenu.resx">
+      <DependentUpon>FrmMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmProfile.resx">
       <DependentUpon>FrmProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmSidebar.resx">
-      <DependentUpon>FrmSidebar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMovieDetails.resx">
       <DependentUpon>FrmMovieDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmWishlist.resx">
-      <DependentUpon>FrmWishlist.cs</DependentUpon>
+    <EmbeddedResource Include="FrmFavorites.resx">
+      <DependentUpon>FrmFavorites.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -139,6 +149,9 @@
     </Compile>
     <EmbeddedResource Include="FrmRegister.resx">
       <DependentUpon>FrmRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitForm.resx">
+      <DependentUpon>WaitForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -155,11 +168,38 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\713 %281%29.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\713.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\713 %282%29.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\713 %283%29.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\219.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\219 %281%29.gif" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
-      <Project>{63a9dced-eca4-41a2-b4f1-8242294ee9b4}</Project>
-      <Project>{915317bb-a146-485c-b482-e44c17c18e40}</Project>
+      <Project>{41309b80-95c5-49ca-851d-5242006178fb}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Blue_Movies_alt_folder_12376.ico" />
+    <None Include="Resources\Black &amp; Purple Elegant Fashion Brand Slogan Logo.png" />
+    <None Include="Resources\movie.png" />
+    <None Include="Resources\icons8-log-out-48.png" />
+    <None Include="Resources\icons8-admin-settings-male-48.png" />
+    <None Include="Resources\icons8-favorites-50.png" />
+    <None Include="Resources\icons8-compass-40.png" />
+    <None Include="Resources\icons8-discover-50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

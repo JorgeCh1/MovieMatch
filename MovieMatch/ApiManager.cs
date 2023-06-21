@@ -22,6 +22,8 @@ namespace MovieMatch
             httpClient = new HttpClient();
         }
 
+        // Themoviedb usa paginación quiere decir que en cada página de carga almacena 20 películas.
+        // Este método carga la primera página, esto para mayor eficiencia.
         public async Task<List<Movie>> ObtenerTodasLasPeliculas()
         {
             List<Movie> allMovies = new List<Movie>();
@@ -55,6 +57,8 @@ namespace MovieMatch
         }
 
 
+        // Este método carga las miles de millones de películas.
+        // Está comentareado para que saturar la carga en la aplicación, de ser necesario usarlo, descomentarearlo.
         /*public async Task<List<Movie>> ObtenerTodasLasPeliculas()
         {
             List<Movie> allMovies = new List<Movie>();

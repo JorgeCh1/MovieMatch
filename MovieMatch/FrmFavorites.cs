@@ -15,9 +15,11 @@ using System.Runtime.InteropServices;
 
 namespace MovieMatch
 {
-    public partial class FrmWishlist : Form
+    public partial class FrmFavorites : Form
     {
-        public FrmWishlist()
+        int userId = UserContext.LoggedUserId;
+
+        public FrmFavorites()
         {
             InitializeComponent();
         }
@@ -33,7 +35,7 @@ namespace MovieMatch
             base.OnActivated(e);
 
             // Obtener los datos de las películas desde la base de datos
-            List<Peliculas> peliculas = ObtenerPeliculasDesdeBaseDeDatos();
+            List<Peliculas> peliculas = ObtenerPeliculasDelUsuarioLogueado(userId);
 
             // Mostrar los datos en el ListView
             MostrarPeliculasEnListView(peliculas);
@@ -110,13 +112,19 @@ namespace MovieMatch
         const int LVM_SETICONSPACING = LVM_FIRST + 100;
 
 
-        private List<Peliculas> ObtenerPeliculasDesdeBaseDeDatos()
+        private List<Peliculas> ObtenerPeliculasDelUsuarioLogueado(int userId)
         {
             using (var context = new EntityContext())
             {
-                return context.Peliculas.ToList();
+                var usuario = context.Usuarios.Include("Peliculas").FirstOrDefault(u => u.IdUsuario == userId);
+
+                if (usuario != null)
+                {
+                    return usuario.Peliculas.ToList();
+                }
+
+                return new List<Peliculas>();
             }
         }
-
     }
 }

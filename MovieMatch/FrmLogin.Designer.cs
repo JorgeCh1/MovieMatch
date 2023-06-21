@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,18 +37,22 @@
             this.btnIngresar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbCerrar = new System.Windows.Forms.PictureBox();
             this.pbMinimizar = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.errorProviderContra = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderUsuario = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderContra)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderUsuario)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -76,7 +81,7 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(362, 266);
+            this.txtPassword.Location = new System.Drawing.Point(363, 266);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -85,7 +90,7 @@
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(362, 187);
+            this.txtUser.Location = new System.Drawing.Point(363, 187);
             this.txtUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(228, 22);
@@ -98,7 +103,7 @@
             this.btnIngresar.Location = new System.Drawing.Point(287, 391);
             this.btnIngresar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(131, 35);
+            this.btnIngresar.Size = new System.Drawing.Size(131, 34);
             this.btnIngresar.TabIndex = 3;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = true;
@@ -109,6 +114,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(43)))), ((int)(((byte)(73)))));
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(49, 564);
             this.panel1.TabIndex = 7;
@@ -120,9 +126,34 @@
             this.panel2.Controls.Add(this.pbMinimizar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(49, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(648, 47);
             this.panel2.TabIndex = 8;
+            // 
+            // pbCerrar
+            // 
+            this.pbCerrar.Image = ((System.Drawing.Image)(resources.GetObject("pbCerrar.Image")));
+            this.pbCerrar.Location = new System.Drawing.Point(608, 15);
+            this.pbCerrar.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.pbCerrar.Name = "pbCerrar";
+            this.pbCerrar.Size = new System.Drawing.Size(16, 16);
+            this.pbCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbCerrar.TabIndex = 12;
+            this.pbCerrar.TabStop = false;
+            this.pbCerrar.Click += new System.EventHandler(this.pbCerrar_Click);
+            // 
+            // pbMinimizar
+            // 
+            this.pbMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("pbMinimizar.Image")));
+            this.pbMinimizar.Location = new System.Drawing.Point(548, 15);
+            this.pbMinimizar.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.pbMinimizar.Name = "pbMinimizar";
+            this.pbMinimizar.Size = new System.Drawing.Size(16, 16);
+            this.pbMinimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbMinimizar.TabIndex = 11;
+            this.pbMinimizar.TabStop = false;
+            this.pbMinimizar.Click += new System.EventHandler(this.pbMinimizar_Click);
             // 
             // label3
             // 
@@ -141,40 +172,18 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(99, 182);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(41, 37);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // pbCerrar
-            // 
-            this.pbCerrar.Image = ((System.Drawing.Image)(resources.GetObject("pbCerrar.Image")));
-            this.pbCerrar.Location = new System.Drawing.Point(608, 15);
-            this.pbCerrar.Margin = new System.Windows.Forms.Padding(6);
-            this.pbCerrar.Name = "pbCerrar";
-            this.pbCerrar.Size = new System.Drawing.Size(16, 16);
-            this.pbCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbCerrar.TabIndex = 12;
-            this.pbCerrar.TabStop = false;
-            this.pbCerrar.Click += new System.EventHandler(this.pbCerrar_Click);
-            // 
-            // pbMinimizar
-            // 
-            this.pbMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("pbMinimizar.Image")));
-            this.pbMinimizar.Location = new System.Drawing.Point(548, 15);
-            this.pbMinimizar.Margin = new System.Windows.Forms.Padding(6);
-            this.pbMinimizar.Name = "pbMinimizar";
-            this.pbMinimizar.Size = new System.Drawing.Size(16, 16);
-            this.pbMinimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbMinimizar.TabIndex = 11;
-            this.pbMinimizar.TabStop = false;
-            this.pbMinimizar.Click += new System.EventHandler(this.pbMinimizar_Click);
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(99, 266);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(41, 37);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -185,19 +194,29 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(43)))), ((int)(((byte)(73)))));
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(49, 519);
+            this.panel3.Location = new System.Drawing.Point(49, 518);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(648, 45);
+            this.panel3.Size = new System.Drawing.Size(648, 46);
             this.panel3.TabIndex = 12;
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(43)))), ((int)(((byte)(73)))));
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(655, 47);
+            this.panel4.Location = new System.Drawing.Point(654, 47);
+            this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(42, 472);
+            this.panel4.Size = new System.Drawing.Size(43, 471);
             this.panel4.TabIndex = 13;
+            // 
+            // errorProviderContra
+            // 
+            this.errorProviderContra.ContainerControl = this;
+            // 
+            // errorProviderUsuario
+            // 
+            this.errorProviderUsuario.ContainerControl = this;
             // 
             // FrmLogin
             // 
@@ -219,15 +238,19 @@
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.FrmLogin_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderContra)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderUsuario)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,5 +272,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ErrorProvider errorProviderContra;
+        private System.Windows.Forms.ErrorProvider errorProviderUsuario;
     }
 }

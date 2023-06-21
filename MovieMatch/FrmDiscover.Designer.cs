@@ -1,6 +1,6 @@
 ﻿namespace MovieMatch
 {
-    partial class FrmHome
+    partial class FrmDiscover
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDiscover));
             this.lvAllMovies = new System.Windows.Forms.ListView();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblRecomendaciones = new System.Windows.Forms.Label();
@@ -105,6 +106,7 @@
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lvAllMovies);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmHome";
             this.Text = "FrmHome";
             this.Load += new System.EventHandler(this.FrmHome_Load);

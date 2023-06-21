@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sign_In));
             this.txtPrimerNombre = new System.Windows.Forms.TextBox();
             this.txtSegundoNombre = new System.Windows.Forms.TextBox();
@@ -48,24 +49,27 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pbCerrar = new System.Windows.Forms.PictureBox();
             this.pbMinimizar = new System.Windows.Forms.PictureBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPrimerNombre
             // 
             this.txtPrimerNombre.Location = new System.Drawing.Point(433, 159);
-            this.txtPrimerNombre.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.txtPrimerNombre.Margin = new System.Windows.Forms.Padding(5);
             this.txtPrimerNombre.Name = "txtPrimerNombre";
             this.txtPrimerNombre.Size = new System.Drawing.Size(214, 27);
             this.txtPrimerNombre.TabIndex = 1;
+            this.txtPrimerNombre.TextChanged += new System.EventHandler(this.txtPrimerNombre_TextChanged);
             // 
             // txtSegundoNombre
             // 
             this.txtSegundoNombre.Location = new System.Drawing.Point(922, 164);
-            this.txtSegundoNombre.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.txtSegundoNombre.Margin = new System.Windows.Forms.Padding(5);
             this.txtSegundoNombre.Name = "txtSegundoNombre";
             this.txtSegundoNombre.Size = new System.Drawing.Size(212, 27);
             this.txtSegundoNombre.TabIndex = 3;
@@ -77,6 +81,7 @@
             this.txtPrimerApellido.Name = "txtPrimerApellido";
             this.txtPrimerApellido.Size = new System.Drawing.Size(214, 27);
             this.txtPrimerApellido.TabIndex = 5;
+            this.txtPrimerApellido.TextChanged += new System.EventHandler(this.txtPrimerApellido_TextChanged);
             // 
             // txtUsuario
             // 
@@ -94,6 +99,7 @@
             this.txtClave.PasswordChar = '*';
             this.txtClave.Size = new System.Drawing.Size(212, 27);
             this.txtClave.TabIndex = 11;
+            this.txtClave.TextChanged += new System.EventHandler(this.txtClave_TextChanged);
             // 
             // txtSegundoApellido
             // 
@@ -110,13 +116,14 @@
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(214, 27);
             this.txtCorreo.TabIndex = 12;
+            this.txtCorreo.TextChanged += new System.EventHandler(this.txtCorreo_TextChanged);
             // 
             // btnRegistrar
             // 
             this.btnRegistrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegistrar.ForeColor = System.Drawing.Color.Black;
             this.btnRegistrar.Location = new System.Drawing.Point(485, 515);
-            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(5);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(449, 38);
             this.btnRegistrar.TabIndex = 13;
@@ -254,7 +261,7 @@
             this.pbCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbCerrar.TabIndex = 12;
             this.pbCerrar.TabStop = false;
-            this.pbCerrar.Click += new System.EventHandler(this.pbCerrar_Click_1);
+            this.pbCerrar.Click += new System.EventHandler(this.pbCerrar_Click);
             // 
             // pbMinimizar
             // 
@@ -267,6 +274,10 @@
             this.pbMinimizar.TabIndex = 11;
             this.pbMinimizar.TabStop = false;
             this.pbMinimizar.Click += new System.EventHandler(this.pbMinimizar_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // Sign_In
             // 
@@ -294,7 +305,8 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Sign_In";
             this.Text = "Sign_In";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -302,6 +314,7 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCerrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMinimizar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,5 +341,6 @@
         private System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.PictureBox pbCerrar;
         internal System.Windows.Forms.PictureBox pbMinimizar;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

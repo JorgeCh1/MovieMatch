@@ -1,6 +1,8 @@
 ﻿using Entidades;
 using System;
 using System.Data.Entity.Validation;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -8,6 +10,10 @@ namespace MovieMatch
 {
     public partial class FrmProfile : Form
     {
+
+        int userId = UserContext.LoggedUserId;
+        private byte[] imageData;
+
         public FrmProfile()
         {
             InitializeComponent();
@@ -19,25 +25,10 @@ namespace MovieMatch
 
             try
             {
-                string nombreUsuarioCompleto = Environment.UserName;
-
-                // Obtener el primer nombre del nombre de usuario
-                string primerNombre = ObtenerPrimerNombre(nombreUsuarioCompleto);
-
-                // Obtener el ID del usuario desde la base de datos
-                string userId = GetUserIdFromDatabase(primerNombre);
-
-
-                int userIdInt;
-                if (!int.TryParse(userId, out userIdInt))
-                {
-                    MessageBox.Show("El ID de usuario no es válido.");
-                    return;
-                }
                 using (var context = new EntityContext())
                 {
                     // Obtener el usuario desde la base de datos
-                    Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userIdInt);
+                    Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
 
                     if (usuario != null)
                     {
@@ -47,6 +38,25 @@ namespace MovieMatch
                         txtPrimerApellido.Text = usuario.PrimerApellido;
                         txtSegundoApellido.Text = usuario.SegundoApellido;
                         txtCorreo.Text = usuario.CorreoElectronico;
+
+                        // Obtener la imagen del usuario desde la base de datos
+                        byte[] imagenBytes = usuario.Imagen; // Suponiendo que la imagen se almacena como un array de bytes en la propiedad "Imagen" del usuario
+
+                        if (imagenBytes != null && imagenBytes.Length > 0)
+                        {
+                            // Convertir los bytes en una imagen
+                            using (MemoryStream ms = new MemoryStream(imagenBytes))
+                            {
+                                Image imagen = Image.FromStream(ms);
+                                // Asignar la imagen al control de imagen
+                                imgProfile.Image = imagen;
+                            }
+                        }
+                        else
+                        {
+                            // No hay imagen almacenada para el usuario, puedes asignar una imagen predeterminada o dejar el control de imagen vacío
+                            imgProfile.Image = null;
+                        }
                     }
                     else
                     {
@@ -65,25 +75,11 @@ namespace MovieMatch
         {
             try
             {
-                string nombreUsuarioCompleto = Environment.UserName;
-
-                // Obtener el primer nombre del nombre de usuario
-                string primerNombre = ObtenerPrimerNombre(nombreUsuarioCompleto);
-
-                // Obtener el ID del usuario desde la base de datos
-                string userId = GetUserIdFromDatabase(primerNombre);
-
-                int userIdInt;
-                if (!int.TryParse(userId, out userIdInt))
-                {
-                    MessageBox.Show("El ID de usuario no es válido.");
-                    return;
-                }
 
                 using (var context = new EntityContext())
                 {
                     // Obtener el usuario desde la base de datos
-                    Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userIdInt);
+                    Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
 
                     if (usuario != null)
                     {
@@ -93,21 +89,8 @@ namespace MovieMatch
                         usuario.PrimerApellido = txtPrimerApellido.Text;
                         usuario.SegundoApellido = txtSegundoApellido.Text;
                         usuario.CorreoElectronico = txtCorreo.Text;
+                        usuario.Imagen = imageData; // Asignar los datos de la imagen al usuario
 
-                        //// Convertir la imagen a un array de bytes
-                        //byte[] imagenBytes = null;
-                        //Image imagen = imgProfile.Image;
-                        //if (imagen != null)
-                        //{
-                        //    using (MemoryStream ms = new MemoryStream())
-                        //    {
-                        //        imagen.Save(ms, ImageFormat.Jpeg);
-                        //        imagenBytes = ms.ToArray();
-                        //    }
-                        //}
-
-                        //// Asignar la imagen al usuario
-                        //usuario.Imagen = imagenBytes;
 
                         try
                         {
@@ -143,62 +126,14 @@ namespace MovieMatch
             }
         }
 
-        private string ObtenerPrimerNombre(string nombreCompleto)
-        {
-            // Dividir el nombre completo en partes por espacios en blanco
-            string[] partes = nombreCompleto.Split(' ');
-
-            // Tomar el primer elemento del arreglo como el primer nombre
-            string primerNombre = partes[0];
-
-            return primerNombre;
-        }
-
-        private string GetUserIdFromDatabase(string primerNombre)
-        {
-            try
-            {
-                using (var context = new EntityContext())
-                {
-                    // Realizar una consulta utilizando LINQ para obtener el ID del usuario
-                    Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.PrimerNombre == primerNombre);
-
-                    if (usuario != null)
-                        return usuario.IdUsuario.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejar errores o mostrar un mensaje de error
-                MessageBox.Show("Error al obtener el ID del usuario: " + ex.Message);
-            }
-
-            return string.Empty;
-        }
-
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             try
             {
-                string nombreUsuarioCompleto = Environment.UserName;
-
-                // Obtener el primer nombre del nombre de usuario
-                string primerNombre = ObtenerPrimerNombre(nombreUsuarioCompleto);
-
-                // Obtener el ID del usuario desde la base de datos
-                string userId = GetUserIdFromDatabase(primerNombre);
-
-                int userIdInt;
-                if (!int.TryParse(userId, out userIdInt))
-                {
-                    MessageBox.Show("El ID de usuario no es válido.");
-                    return;
-                }
-
                 using (var context = new EntityContext())
                 {
                     // Obtener el usuario desde la base de datos
-                    Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userIdInt);
+                    Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
 
                     if (usuario != null)
                     {
@@ -233,13 +168,19 @@ namespace MovieMatch
             try
             {
                 OpenFileDialog dialog = new OpenFileDialog();
-
                 dialog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png| All Files(*.*)|*.*";
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     string imageLocation = dialog.FileName;
                     imgProfile.ImageLocation = imageLocation;
+
+                    // Leer el archivo de imagen en un arreglo de bytes
+                    using (FileStream stream = new FileStream(imageLocation, FileMode.Open, FileAccess.Read))
+                    {
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, (int)stream.Length);
+                    }
                 }
             }
             catch (Exception)
@@ -247,5 +188,6 @@ namespace MovieMatch
                 MessageBox.Show("Ha ocurrido un error al cargar la imagen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

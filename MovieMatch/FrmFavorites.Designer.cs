@@ -1,6 +1,6 @@
 ﻿namespace MovieMatch
 {
-    partial class FrmWishlist
+    partial class FrmFavorites
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFavorites));
             this.lvWishlist = new System.Windows.Forms.ListView();
             this.ilWishlist = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
@@ -59,6 +60,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lvWishlist);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmWishlist";
             this.Text = "Wishlist";
             this.Load += new System.EventHandler(this.FrmWishlist_Load);
