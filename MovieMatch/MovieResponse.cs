@@ -23,17 +23,47 @@ namespace MovieMatch
 
     public class GenreResponse
     {
+
+        [JsonProperty("genre_ids")]
+        public List<int> GenreIds { get; set; }
+
         [JsonProperty("genres")]
         public List<Genre> Genres { get; set; }
+
+        [JsonProperty("results")]
+        public List<Genre> Results { get; set; }
+
+        [JsonProperty("total_pages")]
+        public int TotalPages { get; set; }
     }
 
     public class Genre
     {
         [JsonProperty("id")]
         public int Id { get; set; }
+        [JsonProperty("original_title")]
+        public string Title { get; set; }
+
+        [JsonProperty("release_date")]
+        public string ReleaseDate { get; set; }
+
+        [JsonProperty("overview")]
+        public string Overview { get; set; }
+
+        [JsonProperty("vote_average")]
+        public double Rating { get; set; }
+
+        [JsonProperty("poster_path")]
+        public string Poster { get; set; }
+
+        [JsonProperty("genre_ids")]
+        public List<int> GenreIds { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        [JsonProperty("genres")]
+        public List<string> Genres { get; set; }
     }
 
     public class Movie
@@ -59,6 +89,10 @@ namespace MovieMatch
         [JsonProperty("genre_ids")]
         public List<int> GenreIds { get; set; }
 
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("genres")]
         public List<string> Genres { get; set; }
     }
 
