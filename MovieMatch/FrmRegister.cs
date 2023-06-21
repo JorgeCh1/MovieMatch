@@ -21,6 +21,7 @@ namespace MovieMatch
             InitializeComponent();
         }
 
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;

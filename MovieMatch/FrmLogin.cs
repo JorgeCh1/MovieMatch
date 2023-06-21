@@ -16,12 +16,10 @@ namespace MovieMatch
     {
         WaitFormFunc waitForm = new WaitFormFunc();
         bool error = false;
-
         public FrmLogin()
         {
             InitializeComponent();
         }
-
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
