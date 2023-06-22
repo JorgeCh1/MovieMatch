@@ -62,7 +62,7 @@
             this.txtPrimerNombre.Location = new System.Drawing.Point(433, 159);
             this.txtPrimerNombre.Margin = new System.Windows.Forms.Padding(5);
             this.txtPrimerNombre.Name = "txtPrimerNombre";
-            this.txtPrimerNombre.Size = new System.Drawing.Size(214, 23);
+            this.txtPrimerNombre.Size = new System.Drawing.Size(214, 27);
             this.txtPrimerNombre.TabIndex = 1;
             this.txtPrimerNombre.TextChanged += new System.EventHandler(this.txtPrimerNombre_TextChanged);
             // 
@@ -71,7 +71,7 @@
             this.txtSegundoNombre.Location = new System.Drawing.Point(922, 164);
             this.txtSegundoNombre.Margin = new System.Windows.Forms.Padding(5);
             this.txtSegundoNombre.Name = "txtSegundoNombre";
-            this.txtSegundoNombre.Size = new System.Drawing.Size(212, 23);
+            this.txtSegundoNombre.Size = new System.Drawing.Size(212, 27);
             this.txtSegundoNombre.TabIndex = 3;
             // 
             // txtPrimerApellido
@@ -79,7 +79,7 @@
             this.txtPrimerApellido.Location = new System.Drawing.Point(433, 240);
             this.txtPrimerApellido.Margin = new System.Windows.Forms.Padding(5, 31, 5, 5);
             this.txtPrimerApellido.Name = "txtPrimerApellido";
-            this.txtPrimerApellido.Size = new System.Drawing.Size(214, 23);
+            this.txtPrimerApellido.Size = new System.Drawing.Size(214, 27);
             this.txtPrimerApellido.TabIndex = 5;
             this.txtPrimerApellido.TextChanged += new System.EventHandler(this.txtPrimerApellido_TextChanged);
             // 
@@ -88,7 +88,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(433, 316);
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(5, 31, 5, 5);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(214, 23);
+            this.txtUsuario.Size = new System.Drawing.Size(214, 27);
             this.txtUsuario.TabIndex = 9;
             // 
             // txtClave
@@ -97,7 +97,7 @@
             this.txtClave.Margin = new System.Windows.Forms.Padding(5, 31, 5, 5);
             this.txtClave.Name = "txtClave";
             this.txtClave.PasswordChar = '*';
-            this.txtClave.Size = new System.Drawing.Size(212, 23);
+            this.txtClave.Size = new System.Drawing.Size(212, 27);
             this.txtClave.TabIndex = 11;
             this.txtClave.TextChanged += new System.EventHandler(this.txtClave_TextChanged);
             // 
@@ -106,7 +106,7 @@
             this.txtSegundoApellido.Location = new System.Drawing.Point(922, 245);
             this.txtSegundoApellido.Margin = new System.Windows.Forms.Padding(5, 31, 5, 5);
             this.txtSegundoApellido.Name = "txtSegundoApellido";
-            this.txtSegundoApellido.Size = new System.Drawing.Size(212, 23);
+            this.txtSegundoApellido.Size = new System.Drawing.Size(212, 27);
             this.txtSegundoApellido.TabIndex = 7;
             // 
             // txtCorreo
@@ -114,12 +114,15 @@
             this.txtCorreo.Location = new System.Drawing.Point(433, 393);
             this.txtCorreo.Margin = new System.Windows.Forms.Padding(5, 31, 5, 5);
             this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Size = new System.Drawing.Size(214, 23);
+            this.txtCorreo.Size = new System.Drawing.Size(214, 27);
             this.txtCorreo.TabIndex = 12;
             this.txtCorreo.TextChanged += new System.EventHandler(this.txtCorreo_TextChanged);
             // 
             // btnRegistrar
             // 
+            this.btnRegistrar.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnRegistrar.FlatAppearance.BorderSize = 0;
+            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRegistrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegistrar.ForeColor = System.Drawing.Color.Black;
             this.btnRegistrar.Location = new System.Drawing.Point(485, 515);
@@ -128,7 +131,7 @@
             this.btnRegistrar.Size = new System.Drawing.Size(449, 38);
             this.btnRegistrar.TabIndex = 13;
             this.btnRegistrar.Text = "Registrar";
-            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.UseVisualStyleBackColor = false;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // label2
@@ -140,7 +143,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(34, 8, 0, 0);
-            this.label2.Size = new System.Drawing.Size(150, 25);
+            this.label2.Size = new System.Drawing.Size(170, 28);
             this.label2.TabIndex = 0;
             this.label2.Text = "Primer Nombre";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -154,7 +157,7 @@
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(34, 8, 0, 0);
-            this.label3.Size = new System.Drawing.Size(167, 25);
+            this.label3.Size = new System.Drawing.Size(186, 28);
             this.label3.TabIndex = 2;
             this.label3.Text = "Segundo Nombre";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -168,7 +171,7 @@
             this.label4.Margin = new System.Windows.Forms.Padding(5, 31, 5, 0);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(34, 8, 0, 0);
-            this.label4.Size = new System.Drawing.Size(152, 25);
+            this.label4.Size = new System.Drawing.Size(172, 28);
             this.label4.TabIndex = 4;
             this.label4.Text = "Primer Apellido";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -182,7 +185,7 @@
             this.label6.Margin = new System.Windows.Forms.Padding(5, 31, 5, 0);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(34, 8, 0, 0);
-            this.label6.Size = new System.Drawing.Size(98, 25);
+            this.label6.Size = new System.Drawing.Size(108, 28);
             this.label6.TabIndex = 8;
             this.label6.Text = "Usuario";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -196,7 +199,7 @@
             this.label7.Margin = new System.Windows.Forms.Padding(5, 31, 5, 0);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(34, 8, 0, 0);
-            this.label7.Size = new System.Drawing.Size(82, 25);
+            this.label7.Size = new System.Drawing.Size(90, 28);
             this.label7.TabIndex = 10;
             this.label7.Text = "Clave";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -210,7 +213,7 @@
             this.label5.Margin = new System.Windows.Forms.Padding(5, 31, 5, 0);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(34, 8, 0, 0);
-            this.label5.Size = new System.Drawing.Size(169, 25);
+            this.label5.Size = new System.Drawing.Size(188, 28);
             this.label5.TabIndex = 6;
             this.label5.Text = "Segundo Apellido";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -224,7 +227,7 @@
             this.label8.Margin = new System.Windows.Forms.Padding(5, 31, 5, 0);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(34, 8, 0, 0);
-            this.label8.Size = new System.Drawing.Size(177, 25);
+            this.label8.Size = new System.Drawing.Size(201, 28);
             this.label8.TabIndex = 11;
             this.label8.Text = "Correo Electronico";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -281,7 +284,7 @@
             // 
             // Sign_In
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
             this.ClientSize = new System.Drawing.Size(1198, 629);

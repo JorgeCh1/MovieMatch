@@ -63,12 +63,13 @@ namespace MovieMatch
 
                 if (exists)
                 {
-                    // La película ya existe, activar el checkbutton
-                    chkSaveMovie.Checked = true;
+                    pbLLeno.Visible = true;
+                    pbVacio.Visible = false;
                 }
                 else
                 {
-                    chkSaveMovie.Checked = false;
+                    pbLLeno.Visible = false;
+                    pbVacio.Visible = true;
                 }
             }
 
@@ -172,7 +173,19 @@ namespace MovieMatch
             }
         }
 
+        private void pbVacio_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+            pbLLeno.Visible = true;
+            pbVacio.Visible = false;
+        }
 
+        private void pbLLeno_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+            pbVacio.Visible = true;
+            pbLLeno.Visible = false;
+        }
     }
 
 }

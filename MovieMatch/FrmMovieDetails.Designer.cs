@@ -40,7 +40,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.pbLLeno = new System.Windows.Forms.PictureBox();
+            this.pbVacio = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoster)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLLeno)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVacio)).BeginInit();
             this.SuspendLayout();
             // 
             // pbPoster
@@ -57,7 +62,7 @@
             this.lblRating.AutoSize = true;
             this.lblRating.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRating.ForeColor = System.Drawing.Color.White;
-            this.lblRating.Location = new System.Drawing.Point(246, 602);
+            this.lblRating.Location = new System.Drawing.Point(214, 661);
             this.lblRating.Name = "lblRating";
             this.lblRating.Size = new System.Drawing.Size(102, 22);
             this.lblRating.TabIndex = 3;
@@ -102,7 +107,7 @@
             this.chkSaveMovie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.chkSaveMovie.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSaveMovie.ForeColor = System.Drawing.SystemColors.Control;
-            this.chkSaveMovie.Location = new System.Drawing.Point(209, 505);
+            this.chkSaveMovie.Location = new System.Drawing.Point(370, 568);
             this.chkSaveMovie.Name = "chkSaveMovie";
             this.chkSaveMovie.Size = new System.Drawing.Size(70, 29);
             this.chkSaveMovie.TabIndex = 6;
@@ -161,11 +166,44 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Gold;
-            this.label4.Location = new System.Drawing.Point(107, 602);
+            this.label4.Location = new System.Drawing.Point(75, 661);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(120, 22);
             this.label4.TabIndex = 10;
             this.label4.Text = "Calificación:";
+            // 
+            // pbLLeno
+            // 
+            this.pbLLeno.Image = ((System.Drawing.Image)(resources.GetObject("pbLLeno.Image")));
+            this.pbLLeno.Location = new System.Drawing.Point(93, 505);
+            this.pbLLeno.Name = "pbLLeno";
+            this.pbLLeno.Size = new System.Drawing.Size(65, 64);
+            this.pbLLeno.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLLeno.TabIndex = 11;
+            this.pbLLeno.TabStop = false;
+            this.pbLLeno.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbLLeno_MouseClick);
+            // 
+            // pbVacio
+            // 
+            this.pbVacio.Image = ((System.Drawing.Image)(resources.GetObject("pbVacio.Image")));
+            this.pbVacio.Location = new System.Drawing.Point(176, 505);
+            this.pbVacio.Name = "pbVacio";
+            this.pbVacio.Size = new System.Drawing.Size(67, 64);
+            this.pbVacio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbVacio.TabIndex = 12;
+            this.pbVacio.TabStop = false;
+            this.pbVacio.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbVacio_MouseClick);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(122, 592);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(84, 22);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Favoritos";
             // 
             // FrmMovieDetails
             // 
@@ -173,6 +211,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
             this.ClientSize = new System.Drawing.Size(1022, 682);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.pbVacio);
+            this.Controls.Add(this.pbLLeno);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -191,6 +232,8 @@
             this.Text = "MovieDetails";
             this.Load += new System.EventHandler(this.FrmMovieDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPoster)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLLeno)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVacio)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,5 +252,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox pbLLeno;
+        private System.Windows.Forms.PictureBox pbVacio;
+        private System.Windows.Forms.Label label5;
     }
 }
