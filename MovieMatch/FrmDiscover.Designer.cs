@@ -50,13 +50,13 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.txtSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
             this.txtSearch.ForeColor = System.Drawing.Color.White;
-            this.txtSearch.Location = new System.Drawing.Point(631, 12);
+            this.txtSearch.Location = new System.Drawing.Point(760, 23);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(329, 22);
             this.txtSearch.TabIndex = 1;
-            this.txtSearch.Text = "\r\n";
+            this.txtSearch.Text = "\r\nBuscar";
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // lblRecomendaciones
@@ -118,9 +118,9 @@
         #endregion
 
         private System.Windows.Forms.ListView lvAllMovies;
-        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblRecomendaciones;
         private System.Windows.Forms.Label lblAllMovies;
         private System.Windows.Forms.ListView lvRMovies;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

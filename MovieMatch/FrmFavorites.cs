@@ -12,12 +12,14 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace MovieMatch
 {
     public partial class FrmFavorites : Form
     {
         int userId = UserContext.LoggedUserId;
+        WaitFormFunc waitForm = new WaitFormFunc();
 
         public FrmFavorites()
         {
@@ -33,6 +35,9 @@ namespace MovieMatch
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
+
+            waitForm.Show(this);
+            Thread.Sleep(5000);
 
             // Obtener los datos de las películas desde la base de datos
             List<Peliculas> peliculas = ObtenerPeliculasDelUsuarioLogueado(userId);
@@ -74,6 +79,7 @@ namespace MovieMatch
                     ForeColor = Color.White,
                     ImageIndex = imageListLarge.Images.Count - 1
                 };
+                waitForm.Close();
 
                 lvWishlist.Items.Add(item);
             }

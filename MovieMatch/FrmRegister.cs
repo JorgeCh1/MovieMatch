@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,8 @@ namespace MovieMatch
     public partial class Sign_In : Form
     {
         bool error = false;
+        WaitFormFunc waitForm = new WaitFormFunc();
+
         public Sign_In()
         {
             InitializeComponent();
@@ -24,6 +27,8 @@ namespace MovieMatch
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            waitForm.Show(this);
+            Thread.Sleep(5000);
             DateTime now = DateTime.Now;
             string sPass = Encrypt.GetSHA256(txtClave.Text.Trim());
 
@@ -32,6 +37,7 @@ namespace MovieMatch
             if (error == true)
             {
                 MessageBox.Show("Hay campos con errores o vacios");
+                waitForm.Close();
             }
             else
             {
@@ -58,6 +64,7 @@ namespace MovieMatch
                         this.Hide();
                         FrmLogin loginForm = new FrmLogin();
                         loginForm.Show();
+                        waitForm.Close();
                     }
                     catch (DbEntityValidationException ex)
                     {

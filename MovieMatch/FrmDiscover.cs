@@ -107,12 +107,6 @@ namespace MovieMatch
                 // Ajustar el ancho de las columnas al contenido
                 lvRMovies.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
-                // Ajustar el ancho de las columnas para lograr el efecto horizontal
-                lvRMovies.Columns[0].Width = lvRMovies.Width - SystemInformation.VerticalScrollBarWidth;
-
-                // Ocultar los encabezados de columna
-                lvRMovies.HeaderStyle = ColumnHeaderStyle.None;
-
             }
             catch (Exception ex)
             {
@@ -185,7 +179,6 @@ namespace MovieMatch
 
                 // Ajustar el ancho de las columnas al contenido
                 lvAllMovies.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                //Mostrar();
 
             }
             catch (Exception ex)
@@ -240,64 +233,6 @@ namespace MovieMatch
                 movieDetailsForm.Show();
             }
         }
-
-        //private async void Mostrar()
-        //{
-        //    string generoEspecifico = string.Empty;
-
-        //    // Obtener el género específico desde la base de datos utilizando Entity Framework
-        //    using (var context = new EntityContext())
-        //    {
-        //        // Realizar una consulta para obtener la película deseada
-        //        var pelicula = context.Peliculas.FirstOrDefault();
-
-        //        if (pelicula != null)
-        //        {
-        //            // Obtener los géneros de la película
-        //            string generosPelicula = pelicula.Generos;
-
-        //            // Separar los géneros utilizando el delimitador (coma en este caso)
-        //            string[] generos = generosPelicula.Split(',');
-
-        //            // Utilizar el primer género o todos los géneros, según tus necesidades
-        //            generoEspecifico = generos.FirstOrDefault();
-        //            // O
-        //            //string[] generosEspecificos = generos;
-        //        }
-        //    }
-
-        //    // Verificar si se obtuvo el género específico desde la base de datos
-        //    if (!string.IsNullOrEmpty(generoEspecifico))
-        //    {
-        //        // Obtener todos los géneros desde la API
-        //        GenreResponse genreResponse = await apiManager.ObtenerTodosLosGeneros();
-
-        //        // Obtener el género específico por su nombre
-        //        Genre genreEspecifico = genreResponse.Genres.FirstOrDefault(g => g.Name.Equals(generoEspecifico, StringComparison.OrdinalIgnoreCase));
-
-        //        // Verificar si se encontró el género específico
-        //        if (genreEspecifico != null)
-        //        {
-        //            // Obtener todas las películas desde la API para el género específico
-        //            List<Movie> peliculasPorGenero = await apiManager.ObtenerPeliculasPorGenero(genreEspecifico.Name, genreResponse);
-
-        //            // Mostrar las películas filtradas en el ListView
-        //            MostrarPelículasRecomendadas(peliculasPorGenero, genreResponse.Genres);
-        //        }
-        //        else
-        //        {
-        //            // Manejar el caso cuando el género específico no se encuentra en la respuesta de la API
-        //            // Puedes mostrar un mensaje de error o tomar alguna otra acción
-        //            Console.WriteLine($"El género \"{generoEspecifico}\" no fue encontrado.");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // Manejar el caso cuando no se obtuvo el género específico desde la base de datos
-        //        // Puedes mostrar un mensaje de error o tomar alguna otra acción
-        //        Console.WriteLine("No se pudo obtener el género específico desde la base de datos.");
-        //    }
-        //}
 
         private async void Mostrar()
         {
@@ -377,11 +312,6 @@ namespace MovieMatch
                 Console.WriteLine("No se encontraron películas en la base de datos.");
             }
         }
-
-
-
-
-
 
         private async void FilterMoviesByTitle(string keyword)
         {
