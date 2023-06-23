@@ -15,7 +15,6 @@ namespace MovieMatch
         FrmDiscover home;
         FrmFavorites favorites;
         FrmProfile profile;
-        FrmMovieDetails movieDetails;
         public FrmMainMenu()
         {
             InitializeComponent();
@@ -111,33 +110,6 @@ namespace MovieMatch
         private void pbCerrar_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            // Ocultar los formularios secundarios existentes si están visibles
-            /*if (home != null && home.Visible)
-            {
-                home.Hide();
-                pbLogo.Show();
-            }
-
-            if (favorites != null && favorites.Visible)
-            {
-                favorites.Hide();
-                pbLogo.Show();
-            }
-
-            if (profile != null && profile.Visible)
-            {
-                profile.Hide();
-                pbLogo.Show();
-            }
-            if (movieDetails != null && movieDetails.Visible)
-            {
-                movieDetails.Hide();
-                pbLogo.Show();
-            }*/
         }
     }
 }
