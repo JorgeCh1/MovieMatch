@@ -36,9 +36,6 @@ namespace MovieMatch
         {
             base.OnActivated(e);
 
-            waitForm.Show(this);
-            Thread.Sleep(5000);
-
             // Obtener los datos de las películas desde la base de datos
             List<Peliculas> peliculas = ObtenerPeliculasDelUsuarioLogueado(userId);
 
@@ -48,6 +45,8 @@ namespace MovieMatch
 
         private async void MostrarPeliculasEnListView(List<Peliculas> peliculas)
         {
+            waitForm.Show(this);
+            Thread.Sleep(5000);
             // Limpiar el ListView
             lvWishlist.Items.Clear();
             lvWishlist.View = View.LargeIcon;

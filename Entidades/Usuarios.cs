@@ -11,7 +11,6 @@ namespace Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuarios()
         {
-            Comentarios = new HashSet<Comentarios>();
             Peliculas = new HashSet<Peliculas>();
         }
 
@@ -48,9 +47,6 @@ namespace Entidades
         public DateTime FechaCreacionCuenta { get; set; }
 
         public byte[] Imagen { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comentarios> Comentarios { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Peliculas> Peliculas { get; set; }

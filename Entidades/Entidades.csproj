@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{41309B80-95C5-49CA-851D-5242006178FB}</ProjectGuid>
+    <ProjectGuid>{DA1B4C9C-756A-497E-88A0-23CFAF693019}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Entidades</RootNamespace>
     <AssemblyName>Entidades</AssemblyName>
@@ -55,7 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comentarios.cs" />
     <Compile Include="EntityContext.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

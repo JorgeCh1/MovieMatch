@@ -36,8 +36,8 @@ namespace MovieMatch
 
             if (error == true)
             {
-                MessageBox.Show("Hay campos con errores o vacios");
                 waitForm.Close();
+                MessageBox.Show("Hay campos con errores o vacios");
             }
             else
             {
@@ -139,7 +139,7 @@ namespace MovieMatch
         bool EsAlfab(Control control)
         {
             // Patrón de expresión regular para verificar si el texto es alfabético
-            string pattern = "^[a-zA-Z]+$";
+            string pattern = @"^[a-zA-ZáéíóúÁÉÍÓÚ0-9]+$";
 
             // Verificar si el texto coincide con el patrón
             if (Regex.IsMatch(control.Text, pattern))
@@ -174,7 +174,7 @@ namespace MovieMatch
             {
                 errorProvider.SetError(txtPrimerNombre, "Debe ser alfabetico");
                 error = true;
-            } 
+            }
             else
             {
                 error = false;

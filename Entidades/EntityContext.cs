@@ -12,26 +12,15 @@ namespace Entidades
         {
         }
 
-        public virtual DbSet<Comentarios> Comentarios { get; set; }
         public virtual DbSet<Peliculas> Peliculas { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Peliculas>()
-                .HasMany(e => e.Comentarios)
-                .WithRequired(e => e.Peliculas)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Peliculas>()
                 .HasMany(e => e.Usuarios)
                 .WithMany(e => e.Peliculas)
                 .Map(m => m.ToTable("PeliculasUsuarios").MapLeftKey("IdPelicula").MapRightKey("IdUsuario"));
-
-            modelBuilder.Entity<Usuarios>()
-                .HasMany(e => e.Comentarios)
-                .WithRequired(e => e.Usuarios)
-                .WillCascadeOnDelete(false);
         }
     }
 }

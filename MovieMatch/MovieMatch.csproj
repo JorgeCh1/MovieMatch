@@ -186,12 +186,6 @@
     <None Include="Resources\219 %281%29.gif" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entidades\Entidades.csproj">
-      <Project>{41309b80-95c5-49ca-851d-5242006178fb}</Project>
-      <Name>Entidades</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Blue_Movies_alt_folder_12376.ico" />
     <None Include="Resources\Black &amp; Purple Elegant Fashion Brand Slogan Logo.png" />
     <None Include="Resources\movie.png" />
@@ -200,6 +194,12 @@
     <None Include="Resources\icons8-favorites-50.png" />
     <None Include="Resources\icons8-compass-40.png" />
     <None Include="Resources\icons8-discover-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{da1b4c9c-756a-497e-88a0-23cfaf693019}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

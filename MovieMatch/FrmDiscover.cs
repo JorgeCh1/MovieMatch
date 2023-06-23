@@ -44,7 +44,84 @@ namespace MovieMatch
 
         private void MainForm_Enter(object sender, EventArgs e)
         {
-            Mostrar();
+            MostrarRecomendaciones();
+        }
+
+        private async void MostrarRecomendaciones()
+        {
+            List<Peliculas> peliculas = null;
+
+            // Obtener las películas del usuario logueado desde la base de datos utilizando Entity Framework
+            using (var context = new EntityContext())
+            {
+                var usuario = context.Usuarios.Include("Peliculas").FirstOrDefault(u => u.IdUsuario == userId);
+
+                if (usuario != null)
+                {
+                    peliculas = usuario.Peliculas.ToList();
+                }
+            }
+
+            // Verificar si se obtuvieron películas desde la base de datos
+            if (peliculas != null && peliculas.Any())
+            {
+                // Obtener todos los géneros desde la API
+                GenreResponse genreResponse = await apiManager.ObtenerTodosLosGeneros();
+
+                // Crear un conjunto para almacenar los Ids de las películas ya agregadas
+                HashSet<int> idsPeliculasAgregadas = new HashSet<int>();
+
+                // Obtener todas las películas filtradas por género
+                List<Movie> peliculasFiltradas = new List<Movie>();
+
+                // Recorrer todas las películas
+                foreach (Peliculas pelicula in peliculas)
+                {
+                    // Obtener los géneros de la película
+                    string generosPelicula = pelicula.Generos;
+
+                    // Separar los géneros utilizando el delimitador (coma en este caso)
+                    string[] generos = generosPelicula.Split(',');
+
+                    // Recorrer los géneros de la película
+                    foreach (string generoPelicula in generos)
+                    {
+                        // Obtener el género específico por su nombre
+                        Genre genreEspecifico = genreResponse.Genres.FirstOrDefault(g => g.Name.Equals(generoPelicula.Trim(), StringComparison.OrdinalIgnoreCase));
+
+                        // Verificar si se encontró el género específico
+                        if (genreEspecifico != null)
+                        {
+                            // Obtener todas las películas desde la API para el género específico
+                            List<Movie> peliculasPorGenero = await apiManager.ObtenerPeliculasPorGenero(genreEspecifico.Name, genreResponse);
+
+                            // Agregar las películas filtradas que no se han agregado previamente
+                            foreach (Movie peliculaPorGenero in peliculasPorGenero)
+                            {
+                                if (!idsPeliculasAgregadas.Contains(peliculaPorGenero.Id))
+                                {
+                                    idsPeliculasAgregadas.Add(peliculaPorGenero.Id);
+                                    peliculasFiltradas.Add(peliculaPorGenero);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Manejar el caso cuando el género específico no se encuentra en la respuesta de la API
+                            Console.WriteLine($"El género \"{generoPelicula}\" no fue encontrado.");
+                        }
+                    }
+                }
+
+                // Mostrar las películas filtradas en el ListView
+                MostrarPelículasRecomendadas(peliculasFiltradas, genreResponse.Genres);
+            }
+            else
+            {
+                // Manejar el caso cuando no se obtuvieron películas desde la base de datos
+                lvRMovies.Clear();
+                Console.WriteLine("No se encontraron películas en la base de datos.");
+            }
         }
 
         private async void MostrarPelículasRecomendadas(List<Movie> peliculasPorGenero, List<Genre> genres)
@@ -111,11 +188,9 @@ namespace MovieMatch
             catch (Exception ex)
             {
                 // Manejar cualquier excepción
-                MessageBox.Show("Ocurrió un error al obtener las películasd: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocurrió un error al obtener las películas: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
 
         private async void MostrarPelículas(List<Movie> movies, List<Genre> genres)
         {
@@ -188,28 +263,28 @@ namespace MovieMatch
             }
         }
 
-        private async Task<Image> DownloadPosterImage(string posterPath)
+        private async void lvRMovies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string baseUrl = "https://image.tmdb.org/t/p/original";
-            string fullUrl = baseUrl + posterPath;
-
-            using (HttpClient httpClient = new HttpClient())
+            if (lvRMovies.SelectedItems.Count > 0)
             {
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("image/jpeg"));
-                byte[] imageData = await httpClient.GetByteArrayAsync(fullUrl);
-                using (MemoryStream memoryStream = new MemoryStream(imageData))
-                {
-                    return Image.FromStream(memoryStream);
-                }
+                // Obtener el elemento seleccionado
+                ListViewItem selectedItem = lvRMovies.SelectedItems[0];
+
+                // Obtener los datos de la película desde la propiedad Tag
+                Movie movie = (Movie)selectedItem.Tag;
+
+                // Descargar la imagen del póster
+                Image posterImage = await DownloadPosterImage(movie.Poster);
+
+                // Crear una instancia del formulario de detalles y pasar los datos y la imagen del póster
+                FrmMovieDetails movieDetailsForm = new FrmMovieDetails(movie, posterImage);
+
+                // Configurar el formulario de detalles como formulario secundario del formulario principal
+                movieDetailsForm.MdiParent = this.MdiParent;
+                movieDetailsForm.Dock = DockStyle.Fill;
+                movieDetailsForm.Show();
             }
-
         }
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-
-        const int LVM_FIRST = 0x1000;
-        const int LVM_SETICONSPACING = LVM_FIRST + 100;
 
         private async void lvAllMovies_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -231,85 +306,6 @@ namespace MovieMatch
                 movieDetailsForm.MdiParent = this.MdiParent;
                 movieDetailsForm.Dock = DockStyle.Fill;
                 movieDetailsForm.Show();
-            }
-        }
-
-        private async void Mostrar()
-        {
-            List<Peliculas> peliculas = null;
-
-            // Obtener las películas del usuario logueado desde la base de datos utilizando Entity Framework
-            using (var context = new EntityContext())
-            {
-                var usuario = context.Usuarios.Include("Peliculas").FirstOrDefault(u => u.IdUsuario == userId);
-
-                if (usuario != null)
-                {
-                    peliculas = usuario.Peliculas.ToList();
-                }
-            }
-
-            // Verificar si se obtuvieron películas desde la base de datos
-            if (peliculas != null && peliculas.Any())
-            {
-                // Obtener todos los géneros desde la API
-                GenreResponse genreResponse = await apiManager.ObtenerTodosLosGeneros();
-
-                // Crear un conjunto para almacenar los Ids de las películas ya agregadas
-                HashSet<int> idsPeliculasAgregadas = new HashSet<int>();
-
-                // Obtener todas las películas filtradas por género
-                List<Movie> peliculasFiltradas = new List<Movie>();
-
-                // Recorrer todas las películas
-                foreach (Peliculas pelicula in peliculas)
-                {
-                    // Obtener los géneros de la película
-                    string generosPelicula = pelicula.Generos;
-
-                    // Separar los géneros utilizando el delimitador (coma en este caso)
-                    string[] generos = generosPelicula.Split(',');
-
-                    // Recorrer los géneros de la película
-                    foreach (string generoPelicula in generos)
-                    {
-                        // Obtener el género específico por su nombre
-                        Genre genreEspecifico = genreResponse.Genres.FirstOrDefault(g => g.Name.Equals(generoPelicula.Trim(), StringComparison.OrdinalIgnoreCase));
-
-                        // Verificar si se encontró el género específico
-                        if (genreEspecifico != null)
-                        {
-                            // Obtener todas las películas desde la API para el género específico
-                            List<Movie> peliculasPorGenero = await apiManager.ObtenerPeliculasPorGenero(genreEspecifico.Name, genreResponse);
-
-                            // Agregar las películas filtradas que no se han agregado previamente
-                            foreach (Movie peliculaPorGenero in peliculasPorGenero)
-                            {
-                                if (!idsPeliculasAgregadas.Contains(peliculaPorGenero.Id))
-                                {
-                                    idsPeliculasAgregadas.Add(peliculaPorGenero.Id);
-                                    peliculasFiltradas.Add(peliculaPorGenero);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // Manejar el caso cuando el género específico no se encuentra en la respuesta de la API
-                            // Puedes mostrar un mensaje de error o tomar alguna otra acción
-                            Console.WriteLine($"El género \"{generoPelicula}\" no fue encontrado.");
-                        }
-                    }
-                }
-
-                // Mostrar las películas filtradas en el ListView
-                MostrarPelículasRecomendadas(peliculasFiltradas, genreResponse.Genres);
-            }
-            else
-            {
-                // Manejar el caso cuando no se obtuvieron películas desde la base de datos
-                // Puedes mostrar un mensaje de error o tomar alguna otra acción
-                lvRMovies.Clear();
-                Console.WriteLine("No se encontraron películas en la base de datos.");
             }
         }
 
@@ -346,16 +342,6 @@ namespace MovieMatch
                     Image posterImage = await DownloadPosterImage(filteredMovie.Poster);
                     imageListLarge.Images.Add(posterImage);
 
-                    /* List<string> genreNames = new List<string>();
-                     foreach (int genreId in filteredMovie.GenreIds)
-                     {
-                         Genre genre = allGenres.FirstOrDefault(g => g.Id == genreId);
-                         if (genre != null)
-                         {
-                             genreNames.Add(genre.Name);
-                         }
-                     }*/
-
                     ListViewItem item = new ListViewItem(filteredMovie.Title)
                     {
                         Tag = filteredMovie,
@@ -375,27 +361,48 @@ namespace MovieMatch
             FilterMoviesByTitle(searchText);
         }
 
-        private async void lvRMovies_SelectedIndexChanged(object sender, EventArgs e)
+        private async Task<Image> DownloadPosterImage(string posterPath)
         {
-            if (lvRMovies.SelectedItems.Count > 0)
+            string baseUrl = "https://image.tmdb.org/t/p/original";
+            string fullUrl = baseUrl + posterPath;
+
+            using (HttpClient httpClient = new HttpClient())
             {
-                // Obtener el elemento seleccionado
-                ListViewItem selectedItem = lvRMovies.SelectedItems[0];
-
-                // Obtener los datos de la película desde la propiedad Tag
-                Movie movie = (Movie)selectedItem.Tag;
-
-                // Descargar la imagen del póster
-                Image posterImage = await DownloadPosterImage(movie.Poster);
-
-                // Crear una instancia del formulario de detalles y pasar los datos y la imagen del póster
-                FrmMovieDetails movieDetailsForm = new FrmMovieDetails(movie, posterImage);
-
-                // Configurar el formulario de detalles como formulario secundario del formulario principal
-                movieDetailsForm.MdiParent = this.MdiParent;
-                movieDetailsForm.Dock = DockStyle.Fill;
-                movieDetailsForm.Show();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("image/jpeg"));
+                byte[] imageData = await httpClient.GetByteArrayAsync(fullUrl);
+                using (MemoryStream memoryStream = new MemoryStream(imageData))
+                {
+                    return Image.FromStream(memoryStream);
+                }
             }
+
         }
+
+        // Importar la función SendMessage desde la biblioteca user32.dll
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        // Constantes para mensajes de la lista de vista (ListView)
+        const int LVM_FIRST = 0x1000;                      // Primer mensaje de la lista de vista
+        const int LVM_SETICONSPACING = LVM_FIRST + 100;     // Mensaje para establecer el espaciado entre íconos
+
+        // La función SendMessage se utiliza para enviar mensajes a una ventana en Windows
+        // en este caso, se utiliza para configurar el espaciado entre íconos en una lista de vista
+        // mediante el uso de la función SendMessage de la biblioteca user32.dll
+
+        // Ejemplo de uso:
+        // SendMessage(hWnd, LVM_SETICONSPACING, IntPtr.Zero, new IntPtr(MakeLong(100, 100)));
+
+        // hWnd: Identificador de ventana de la lista de vista
+        // Msg: Código de mensaje que se va a enviar
+        // wParam, lParam: Parámetros adicionales según el mensaje específico
+
+        // En este caso, la constante LVM_FIRST se utiliza para obtener el primer código de mensaje
+        // específico de la lista de vista. LVM_SETICONSPACING es un código de mensaje que se utiliza
+        // para establecer el espaciado entre los íconos en una lista de vista.
+
+        // Al utilizar esta función y las constantes proporcionadas, puedes enviar mensajes a la lista de vista
+        // para personalizar su comportamiento y apariencia según tus necesidades.
+
     }
 }

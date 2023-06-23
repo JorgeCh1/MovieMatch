@@ -94,108 +94,6 @@ namespace MovieMatch
 
 
         }
-
-        //private void pbVacio_MouseClick(object sender, MouseEventArgs e)
-        //{
-        //    string titulo = lblTitle.Text;
-        //    pbLLeno.Visible = true;
-        //    pbVacio.Visible = false;
-
-        //    using (var context = new EntityContext())
-        //    {
-        //        // Verificar si la película ya existe en la base de datos
-        //        bool exists = context.Peliculas.Any(p => p.Titulo == titulo);
-
-        //        if (!exists)
-        //        {
-        //            // Insertar los datos de la película en la base de datos
-
-        //            Peliculas pelicula = new Peliculas
-        //            {
-        //                Titulo = lblTitle.Text,
-        //                FechaLanzamiento = DateTime.Parse(lblDate.Text),
-        //                Rating = double.Parse(lblRating.Text),
-        //                Sinopsis = lblOverview.Text,
-        //                Poster = selectedMovie.Poster,
-        //                // Otros campos de la entidad Pelicula
-        //            };
-
-
-        //            string[] genreArray = lblGenere.Text.Split(',');
-
-        //            pelicula.Generos = string.Join(", ", genreArray.Select(genre => genre.Trim()));
-
-        //            // Agregar la nueva entidad al contexto de la base de datos
-        //            context.Peliculas.Add(pelicula);
-
-        //            try
-        //            {
-        //                // Guardar los cambios en la base de datos
-        //                context.SaveChanges();
-
-        //                // Obtener el usuario actual
-        //                Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
-
-        //                // Establecer la relación entre el usuario y la película
-        //                usuario.Peliculas.Add(pelicula);
-
-        //                // Guardar los cambios en la base de datos para insertar la relación
-        //                context.SaveChanges();
-        //            }
-
-        //            catch (DbEntityValidationException ex)
-        //            {
-        //                // Recorrer los errores de validación
-        //                foreach (var entityValidationError in ex.EntityValidationErrors)
-        //                {
-        //                    var entityEntry = entityValidationError.Entry;
-
-        //                    Console.WriteLine($"Validation errors for entity: {entityEntry.Entity.GetType().Name}");
-
-        //                    // Recorrer los errores de validación para la entidad
-        //                    foreach (var validationError in entityValidationError.ValidationErrors)
-        //                    {
-        //                        Console.WriteLine($"Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}");
-        //                    }
-        //                }
-        //            }
-
-        //            MessageBox.Show("Película guardada en la base de datos.");
-        //        }
-        //    }
-
-        //}
-
-        //private void pbLLeno_MouseClick(object sender, MouseEventArgs e)
-        //{
-        //    string titulo = lblTitle.Text;
-        //    pbVacio.Visible = true;
-        //    pbLLeno.Visible = false;
-        //    using (var context = new EntityContext())
-        //    {
-        //        // Obtener el usuario actual
-        //        Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
-
-        //        // Obtener la película actual
-        //        Peliculas pelicula = usuario.Peliculas.FirstOrDefault(p => p.Titulo == titulo);
-
-
-        //        if (pelicula != null)
-        //        {
-        //            context.Peliculas.Remove(pelicula);
-        //            try
-        //            {
-        //                // Guardar los cambios en la base de datos para eliminar la relación
-        //                context.SaveChanges();
-        //                MessageBox.Show("Película eliminada de la lista del usuario.");
-        //            }
-        //            catch
-        //            {
-        //                MessageBox.Show("Error al eliminar la película de la lista del usuario.");
-        //            }
-        //        }
-        //    }
-        //}
         private void pbVacio_MouseClick(object sender, MouseEventArgs e)
         {
             string titulo = lblTitle.Text;
@@ -239,16 +137,16 @@ namespace MovieMatch
                         {
                             // Guardar los cambios en la base de datos
                             context.SaveChanges();
-                            MessageBox.Show("Película guardada en la lista del usuario.");
+                            MessageBox.Show("Película guardada en la lista de favoritos del usuario.");
                         }
                         catch
                         {
-                            MessageBox.Show("Error al guardar la película en la lista del usuario.");
+                            MessageBox.Show("Error al guardar la película en la lista de favoritos del usuario.");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("La película ya está en la lista del usuario.");
+                        MessageBox.Show("La película ya está en la lista de favoritos del usuario.");
                     }
                 }
                 else
@@ -284,16 +182,16 @@ namespace MovieMatch
                         {
                             // Guardar los cambios en la base de datos
                             context.SaveChanges();
-                            MessageBox.Show("Película eliminada de la lista del usuario.");
+                            MessageBox.Show("Película eliminada de la lista de favoritos del usuario.");
                         }
                         catch
                         {
-                            MessageBox.Show("Error al eliminar la película de la lista del usuario.");
+                            MessageBox.Show("Error al eliminar la película de la lista de favoritos del usuario.");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("La película no está en la lista del usuario.");
+                        MessageBox.Show("La película no está en la lista de favoritos del usuario.");
                     }
                 }
                 else

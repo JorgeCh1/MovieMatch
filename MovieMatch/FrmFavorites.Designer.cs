@@ -42,7 +42,7 @@
             this.lvWishlist.HideSelection = false;
             this.lvWishlist.Location = new System.Drawing.Point(0, 51);
             this.lvWishlist.Name = "lvWishlist";
-            this.lvWishlist.Size = new System.Drawing.Size(800, 399);
+            this.lvWishlist.Size = new System.Drawing.Size(1089, 671);
             this.lvWishlist.TabIndex = 0;
             this.lvWishlist.UseCompatibleStateImageBehavior = false;
             // 
@@ -68,7 +68,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1101, 752);
             this.Controls.Add(this.lblRecomendaciones);
             this.Controls.Add(this.lvWishlist);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

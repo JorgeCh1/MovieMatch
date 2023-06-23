@@ -44,25 +44,14 @@ namespace MovieMatch
                 errorProviderContra.Clear();
                 error = false;
             }
-
-            //if (txtPassword.Text.Length == 0)
-            //{
-            //    errorProviderContra.SetError(txtPassword, "No puede estar vacio");
-            //    error = true;
-            //}
-            //else
-            //{
-            //    errorProviderContra.Clear();
-            //    error = false;
-            //}
-
             if (error == true)
             {
-                MessageBox.Show("hay campos vacios");
+                waitForm.Close();
+                MessageBox.Show("Hay campos vacíos. Asegúrese de llenar todos los campos...");
             }
             else
             {
-                using (Entidades.EntityContext context = new EntityContext())
+                using (var context = new EntityContext())
                 {
                     var lst = from d in context.Usuarios
                               where d.Usuario == txtUser.Text
