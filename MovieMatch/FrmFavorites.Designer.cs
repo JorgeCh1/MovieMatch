@@ -40,9 +40,9 @@
             this.lvWishlist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
             this.lvWishlist.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvWishlist.HideSelection = false;
-            this.lvWishlist.Location = new System.Drawing.Point(0, 34);
+            this.lvWishlist.Location = new System.Drawing.Point(0, 51);
             this.lvWishlist.Name = "lvWishlist";
-            this.lvWishlist.Size = new System.Drawing.Size(800, 416);
+            this.lvWishlist.Size = new System.Drawing.Size(800, 399);
             this.lvWishlist.TabIndex = 0;
             this.lvWishlist.UseCompatibleStateImageBehavior = false;
             // 
