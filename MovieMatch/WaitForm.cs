@@ -37,9 +37,9 @@ namespace MovieMatch
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
-            if (lblImageCargando.Image != null)
+            if (pictureBox1.Image != null)
             {
-                lblImageCargando.Dispose();
+                pictureBox1.Dispose();
             }
         }
     }

@@ -1,4 +1,5 @@
- USE master
+
+USE master
 go
 CREATE DATABASE BdPelis
 go
@@ -80,12 +81,12 @@ go
 
 ALTER TABLE PeliculasUsuarios ADD CONSTRAINT RefUsuarios8 
     FOREIGN KEY (IdUsuario)
-    REFERENCES Usuarios(IdUsuario)
+    REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
 go
 
 ALTER TABLE PeliculasUsuarios ADD CONSTRAINT RefPeliculas9 
     FOREIGN KEY (IdPelicula)
-    REFERENCES Peliculas(IdPelicula)
+    REFERENCES Peliculas(IdPelicula) ON DELETE CASCADE
 go
 
 
