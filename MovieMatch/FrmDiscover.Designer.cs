@@ -41,9 +41,9 @@
             this.lvAllMovies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
             this.lvAllMovies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvAllMovies.HideSelection = false;
-            this.lvAllMovies.Location = new System.Drawing.Point(15, 328);
+            this.lvAllMovies.Location = new System.Drawing.Point(16, 402);
             this.lvAllMovies.Name = "lvAllMovies";
-            this.lvAllMovies.Size = new System.Drawing.Size(1061, 374);
+            this.lvAllMovies.Size = new System.Drawing.Size(1061, 347);
             this.lvAllMovies.TabIndex = 0;
             this.lvAllMovies.UseCompatibleStateImageBehavior = false;
             this.lvAllMovies.SelectedIndexChanged += new System.EventHandler(this.lvAllMovies_SelectedIndexChanged);
@@ -64,7 +64,7 @@
             this.lblRecomendaciones.AutoSize = true;
             this.lblRecomendaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.lblRecomendaciones.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblRecomendaciones.Location = new System.Drawing.Point(12, 45);
+            this.lblRecomendaciones.Location = new System.Drawing.Point(12, 64);
             this.lblRecomendaciones.Name = "lblRecomendaciones";
             this.lblRecomendaciones.Size = new System.Drawing.Size(158, 22);
             this.lblRecomendaciones.TabIndex = 2;
@@ -75,31 +75,31 @@
             this.lblAllMovies.AutoSize = true;
             this.lblAllMovies.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.lblAllMovies.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblAllMovies.Location = new System.Drawing.Point(12, 296);
+            this.lblAllMovies.Location = new System.Drawing.Point(12, 357);
             this.lblAllMovies.Name = "lblAllMovies";
-            this.lblAllMovies.Size = new System.Drawing.Size(82, 22);
+            this.lblAllMovies.Size = new System.Drawing.Size(164, 22);
             this.lblAllMovies.TabIndex = 3;
-            this.lblAllMovies.Text = "Películas";
+            this.lblAllMovies.Text = "Todas las películas";
             // 
             // lvRMovies
             // 
+            this.lvRMovies.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.lvRMovies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
             this.lvRMovies.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvRMovies.HideSelection = false;
-            this.lvRMovies.Location = new System.Drawing.Point(15, 78);
+            this.lvRMovies.Location = new System.Drawing.Point(12, 103);
             this.lvRMovies.Name = "lvRMovies";
-            this.lvRMovies.Size = new System.Drawing.Size(945, 200);
+            this.lvRMovies.Size = new System.Drawing.Size(1062, 239);
             this.lvRMovies.TabIndex = 4;
             this.lvRMovies.UseCompatibleStateImageBehavior = false;
-            this.lvRMovies.View = System.Windows.Forms.View.Tile;
             this.lvRMovies.SelectedIndexChanged += new System.EventHandler(this.lvRMovies_SelectedIndexChanged);
             // 
-            // FrmHome
+            // FrmDiscover
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(63)))), ((int)(((byte)(105)))));
-            this.ClientSize = new System.Drawing.Size(1101, 727);
+            this.ClientSize = new System.Drawing.Size(1101, 752);
             this.Controls.Add(this.lvRMovies);
             this.Controls.Add(this.lblAllMovies);
             this.Controls.Add(this.lblRecomendaciones);
@@ -107,7 +107,7 @@
             this.Controls.Add(this.lvAllMovies);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmHome";
+            this.Name = "FrmDiscover";
             this.Text = "FrmHome";
             this.Load += new System.EventHandler(this.FrmHome_Load);
             this.ResumeLayout(false);

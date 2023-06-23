@@ -56,46 +56,6 @@ namespace MovieMatch
             return allMovies;
         }
 
-        //public async Task<List<Movie>> ObtenerPeliculasPorGenero(string nombreGenero)
-        //{
-        //    List<Movie> peliculasPorGenero = new List<Movie>();
-
-        //    try
-        //    {
-        //        // Buscar el ID del género por su nombre
-        //        int? generoId = genreResponse.Genres.FirstOrDefault(g => g.Name.Equals(nombreGenero, StringComparison.OrdinalIgnoreCase))?.Id;
-
-        //        if (generoId.HasValue)
-        //        {
-        //            string url = $"{apiUrl}?api_key={apiKey}&page=1&with_genres={generoId}"; 
-        //            HttpResponseMessage response = await httpClient.GetAsync(url);
-
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                string json = await response.Content.ReadAsStringAsync();
-        //                MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
-
-        //                List<Movie> peliculas = movieResponse.Results;
-        //                peliculasPorGenero.AddRange(peliculas);
-        //            }
-        //            else
-        //            {
-        //                // Manejar el caso de error en la solicitud HTTP
-        //                throw new Exception("Error al obtener las películas por género");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            throw new Exception("El género especificado no fue encontrado.");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Error al obtener las películas por género: " + ex.Message);
-        //    }
-
-        //    return peliculasPorGenero;
-        //}
 
         public async Task<List<Movie>> ObtenerPeliculasPorGenero(string nombreGenero, GenreResponse genreResponse)
         {
@@ -103,7 +63,8 @@ namespace MovieMatch
 
             try
             {
-                string url = $"{apiUrl}?api_key={apiKey}&page=1";
+                int pagina = 1;
+                string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
                 HttpResponseMessage response = await httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
@@ -144,12 +105,6 @@ namespace MovieMatch
             Genre genre = genreResponse.Genres.FirstOrDefault(g => g.Id == genreId);
             return genre?.Name ?? string.Empty;
         }
-
-
-
-
-
-
 
 
         // Este método carga las miles de millones de películas.

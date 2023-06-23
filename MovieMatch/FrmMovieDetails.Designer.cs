@@ -101,20 +101,6 @@
             this.lblGenere.TabIndex = 5;
             this.lblGenere.Text = "Genero";
             // 
-            // chkSaveMovie
-            // 
-            this.chkSaveMovie.AutoSize = true;
-            this.chkSaveMovie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.chkSaveMovie.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSaveMovie.ForeColor = System.Drawing.SystemColors.Control;
-            this.chkSaveMovie.Location = new System.Drawing.Point(370, 568);
-            this.chkSaveMovie.Name = "chkSaveMovie";
-            this.chkSaveMovie.Size = new System.Drawing.Size(70, 29);
-            this.chkSaveMovie.TabIndex = 6;
-            this.chkSaveMovie.Text = "Like";
-            this.chkSaveMovie.UseVisualStyleBackColor = true;
-            this.chkSaveMovie.CheckedChanged += new System.EventHandler(this.chkSaveMovie_CheckedChanged_1);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;

@@ -24,10 +24,14 @@ namespace MovieMatch
         // Crear una instancia de ApiManager con la URL y la clave de API
         ApiManager apiManager = new ApiManager("https://api.themoviedb.org/3/movie/popular", "9487ca9a0bad24fd5b3199338e11662e");
         WaitFormFunc waitForm = new WaitFormFunc();
+        int userId = UserContext.LoggedUserId;
 
         public FrmDiscover()
         {
             InitializeComponent();
+
+            // Suscribirse al evento Enter del formulario
+            this.Enter += MainForm_Enter;
         }
 
         private void FrmHome_Load(object sender, EventArgs e)
@@ -38,23 +42,28 @@ namespace MovieMatch
 
         }
 
-        private async void MostrarPelículasRecomendadas(List<Movie> movies, List<Genre> genres)
+        private void MainForm_Enter(object sender, EventArgs e)
+        {
+            Mostrar();
+        }
+
+        private async void MostrarPelículasRecomendadas(List<Movie> peliculasPorGenero, List<Genre> genres)
         {
             try
             {
                 // Limpiar el ListView y configurar el modo de visualización como Tile
                 lvRMovies.Items.Clear();
-                lvRMovies.View = View.Tile;
+                lvRMovies.View = View.LargeIcon;
 
                 // Crear ImageList para almacenar las imágenes de los pósters
                 ImageList imageListLarge = new ImageList
                 {
-                    ImageSize = new Size(200, 250)
+                    ImageSize = new Size(100, 150)
                 };
                 lvRMovies.LargeImageList = imageListLarge;
 
                 // Agregar las películas al ListView
-                foreach (Movie movie in allMovies)
+                foreach (Movie movie in peliculasPorGenero)
                 {
                     // Descargar la imagen del póster y agregarla al ImageList
                     Image posterImage = await DownloadPosterImage(movie.Poster);
@@ -86,11 +95,11 @@ namespace MovieMatch
 
                     // Debug
                     string genresd = string.Join(", ", movie.Genres);
-                    Debug.WriteLine($"Géneros: {genresd}, Película: {movie.Title}, Año: {movie.ReleaseDate}, Resumen: {movie.Overview}, Calificación: {movie.Rating}");
+                    Debug.WriteLine($"Géneros: {genresd}");
                 }
 
                 // Ajustar el tamaño de visualización de las imágenes en el ListView
-                int iconSize = 200; // Tamaño deseado para la visualización de las imágenes en el ListView
+                int iconSize = 100; // Tamaño deseado para la visualización de las imágenes en el ListView
                 IntPtr wParam = new IntPtr(iconSize);
                 IntPtr lParam = new IntPtr(iconSize);
                 SendMessage(lvRMovies.Handle, LVM_SETICONSPACING, wParam, lParam);
@@ -164,9 +173,8 @@ namespace MovieMatch
                     // Agregar el ListViewItem al ListView
                     lvAllMovies.Items.Add(item);
 
-                    // Debug
-                    string genresd = string.Join(", ", movie.Genres);
-                    Debug.WriteLine($"Géneros: {genresd}, Película: {movie.Title}, Año: {movie.ReleaseDate}, Resumen: {movie.Overview}, Calificación: {movie.Rating}");
+
+                    Debug.WriteLine($"Película: {movie.Title}, Año: {movie.ReleaseDate}, Resumen: {movie.Overview}, Calificación: {movie.Rating}");
                 }
 
                 // Ajustar el tamaño de visualización de las imágenes en el ListView
@@ -177,7 +185,7 @@ namespace MovieMatch
 
                 // Ajustar el ancho de las columnas al contenido
                 lvAllMovies.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                Mostrar();
+                //Mostrar();
 
             }
             catch (Exception ex)
@@ -233,17 +241,93 @@ namespace MovieMatch
             }
         }
 
+        //private async void Mostrar()
+        //{
+        //    string generoEspecifico = string.Empty;
+
+        //    // Obtener el género específico desde la base de datos utilizando Entity Framework
+        //    using (var context = new EntityContext())
+        //    {
+        //        // Realizar una consulta para obtener la película deseada
+        //        var pelicula = context.Peliculas.FirstOrDefault();
+
+        //        if (pelicula != null)
+        //        {
+        //            // Obtener los géneros de la película
+        //            string generosPelicula = pelicula.Generos;
+
+        //            // Separar los géneros utilizando el delimitador (coma en este caso)
+        //            string[] generos = generosPelicula.Split(',');
+
+        //            // Utilizar el primer género o todos los géneros, según tus necesidades
+        //            generoEspecifico = generos.FirstOrDefault();
+        //            // O
+        //            //string[] generosEspecificos = generos;
+        //        }
+        //    }
+
+        //    // Verificar si se obtuvo el género específico desde la base de datos
+        //    if (!string.IsNullOrEmpty(generoEspecifico))
+        //    {
+        //        // Obtener todos los géneros desde la API
+        //        GenreResponse genreResponse = await apiManager.ObtenerTodosLosGeneros();
+
+        //        // Obtener el género específico por su nombre
+        //        Genre genreEspecifico = genreResponse.Genres.FirstOrDefault(g => g.Name.Equals(generoEspecifico, StringComparison.OrdinalIgnoreCase));
+
+        //        // Verificar si se encontró el género específico
+        //        if (genreEspecifico != null)
+        //        {
+        //            // Obtener todas las películas desde la API para el género específico
+        //            List<Movie> peliculasPorGenero = await apiManager.ObtenerPeliculasPorGenero(genreEspecifico.Name, genreResponse);
+
+        //            // Mostrar las películas filtradas en el ListView
+        //            MostrarPelículasRecomendadas(peliculasPorGenero, genreResponse.Genres);
+        //        }
+        //        else
+        //        {
+        //            // Manejar el caso cuando el género específico no se encuentra en la respuesta de la API
+        //            // Puedes mostrar un mensaje de error o tomar alguna otra acción
+        //            Console.WriteLine($"El género \"{generoEspecifico}\" no fue encontrado.");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // Manejar el caso cuando no se obtuvo el género específico desde la base de datos
+        //        // Puedes mostrar un mensaje de error o tomar alguna otra acción
+        //        Console.WriteLine("No se pudo obtener el género específico desde la base de datos.");
+        //    }
+        //}
+
         private async void Mostrar()
         {
-            string generoEspecifico = string.Empty;
+            List<Peliculas> peliculas = null;
 
-            // Obtener el género específico desde la base de datos utilizando Entity Framework
+            // Obtener las películas del usuario logueado desde la base de datos utilizando Entity Framework
             using (var context = new EntityContext())
             {
-                // Realizar una consulta para obtener la película deseada
-                var pelicula = context.Peliculas.FirstOrDefault();
+                var usuario = context.Usuarios.Include("Peliculas").FirstOrDefault(u => u.IdUsuario == userId);
 
-                if (pelicula != null)
+                if (usuario != null)
+                {
+                    peliculas = usuario.Peliculas.ToList();
+                }
+            }
+
+            // Verificar si se obtuvieron películas desde la base de datos
+            if (peliculas != null && peliculas.Any())
+            {
+                // Obtener todos los géneros desde la API
+                GenreResponse genreResponse = await apiManager.ObtenerTodosLosGeneros();
+
+                // Crear un conjunto para almacenar los Ids de las películas ya agregadas
+                HashSet<int> idsPeliculasAgregadas = new HashSet<int>();
+
+                // Obtener todas las películas filtradas por género
+                List<Movie> peliculasFiltradas = new List<Movie>();
+
+                // Recorrer todas las películas
+                foreach (Peliculas pelicula in peliculas)
                 {
                     // Obtener los géneros de la película
                     string generosPelicula = pelicula.Generos;
@@ -251,45 +335,51 @@ namespace MovieMatch
                     // Separar los géneros utilizando el delimitador (coma en este caso)
                     string[] generos = generosPelicula.Split(',');
 
-                    // Utilizar el primer género o todos los géneros, según tus necesidades
-                    generoEspecifico = generos.FirstOrDefault();
-                    // O
-                    //string[] generosEspecificos = generos;
+                    // Recorrer los géneros de la película
+                    foreach (string generoPelicula in generos)
+                    {
+                        // Obtener el género específico por su nombre
+                        Genre genreEspecifico = genreResponse.Genres.FirstOrDefault(g => g.Name.Equals(generoPelicula.Trim(), StringComparison.OrdinalIgnoreCase));
+
+                        // Verificar si se encontró el género específico
+                        if (genreEspecifico != null)
+                        {
+                            // Obtener todas las películas desde la API para el género específico
+                            List<Movie> peliculasPorGenero = await apiManager.ObtenerPeliculasPorGenero(genreEspecifico.Name, genreResponse);
+
+                            // Agregar las películas filtradas que no se han agregado previamente
+                            foreach (Movie peliculaPorGenero in peliculasPorGenero)
+                            {
+                                if (!idsPeliculasAgregadas.Contains(peliculaPorGenero.Id))
+                                {
+                                    idsPeliculasAgregadas.Add(peliculaPorGenero.Id);
+                                    peliculasFiltradas.Add(peliculaPorGenero);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Manejar el caso cuando el género específico no se encuentra en la respuesta de la API
+                            // Puedes mostrar un mensaje de error o tomar alguna otra acción
+                            Console.WriteLine($"El género \"{generoPelicula}\" no fue encontrado.");
+                        }
+                    }
                 }
-            }
 
-            // Verificar si se obtuvo el género específico desde la base de datos
-            if (!string.IsNullOrEmpty(generoEspecifico))
-            {
-                // Obtener todos los géneros desde la API
-                GenreResponse genreResponse = await apiManager.ObtenerTodosLosGeneros();
-
-                // Obtener el género específico por su nombre
-                Genre genreEspecifico = genreResponse.Genres.FirstOrDefault(g => g.Name.Equals(generoEspecifico, StringComparison.OrdinalIgnoreCase));
-
-                // Verificar si se encontró el género específico
-                if (genreEspecifico != null)
-                {
-                    // Obtener todas las películas desde la API para el género específico
-                    List<Movie> peliculasPorGenero = await apiManager.ObtenerPeliculasPorGenero(genreEspecifico.Name, genreResponse);
-
-                    // Mostrar las películas filtradas en el ListView
-                    MostrarPelículasRecomendadas(peliculasPorGenero, genreResponse.Genres);
-                }
-                else
-                {
-                    // Manejar el caso cuando el género específico no se encuentra en la respuesta de la API
-                    // Puedes mostrar un mensaje de error o tomar alguna otra acción
-                    Console.WriteLine($"El género \"{generoEspecifico}\" no fue encontrado.");
-                }
+                // Mostrar las películas filtradas en el ListView
+                MostrarPelículasRecomendadas(peliculasFiltradas, genreResponse.Genres);
             }
             else
             {
-                // Manejar el caso cuando no se obtuvo el género específico desde la base de datos
+                // Manejar el caso cuando no se obtuvieron películas desde la base de datos
                 // Puedes mostrar un mensaje de error o tomar alguna otra acción
-                Console.WriteLine("No se pudo obtener el género específico desde la base de datos.");
+                lvRMovies.Clear();
+                Console.WriteLine("No se encontraron películas en la base de datos.");
             }
         }
+
+
+
 
 
 
@@ -326,15 +416,15 @@ namespace MovieMatch
                     Image posterImage = await DownloadPosterImage(filteredMovie.Poster);
                     imageListLarge.Images.Add(posterImage);
 
-                   /* List<string> genreNames = new List<string>();
-                    foreach (int genreId in filteredMovie.GenreIds)
-                    {
-                        Genre genre = allGenres.FirstOrDefault(g => g.Id == genreId);
-                        if (genre != null)
-                        {
-                            genreNames.Add(genre.Name);
-                        }
-                    }*/
+                    /* List<string> genreNames = new List<string>();
+                     foreach (int genreId in filteredMovie.GenreIds)
+                     {
+                         Genre genre = allGenres.FirstOrDefault(g => g.Id == genreId);
+                         if (genre != null)
+                         {
+                             genreNames.Add(genre.Name);
+                         }
+                     }*/
 
                     ListViewItem item = new ListViewItem(filteredMovie.Title)
                     {

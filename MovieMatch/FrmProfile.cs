@@ -143,6 +143,9 @@ namespace MovieMatch
                             context.Usuarios.Remove(usuario);
                             context.SaveChanges();
                             MessageBox.Show("Usuario eliminado correctamente.");
+                            this.Hide();
+                            FrmLogin loginForm = new FrmLogin();
+                            loginForm.Show();
                         }
                         catch (Exception ex)
                         {

@@ -19,7 +19,6 @@ namespace MovieMatch
         int userId = UserContext.LoggedUserId;
 
 
-
         public FrmMovieDetails(Movie movie, Image poster)
         {
             InitializeComponent();
@@ -56,6 +55,9 @@ namespace MovieMatch
             lblTitle.AutoSize = true;
             lblTitle.MaximumSize = new Size(this.ClientSize.Width - lblTitle.Left * 1, 0);
 
+            // Obtener el usuario actual
+            int userId = UserContext.LoggedUserId;
+
             // Verificar si la película existe en la base de datos
             using (var context = new EntityContext())
             {
@@ -63,8 +65,25 @@ namespace MovieMatch
 
                 if (exists)
                 {
-                    pbLLeno.Visible = true;
-                    pbVacio.Visible = false;
+                    // Obtener la película actual
+                    Peliculas pelicula = context.Peliculas.FirstOrDefault(p => p.Titulo == selectedMovie.Title);
+
+                    // Consultar directamente la tabla intermedia para verificar si el usuario ha dado "like" a la película
+                    string query = $"SELECT COUNT(*) FROM PeliculasUsuarios WHERE IdUsuario = {userId} AND IdPelicula = {pelicula.IdPelicula}";
+                    int likeCount = context.Database.SqlQuery<int>(query).FirstOrDefault();
+
+                    bool userLikedMovie = likeCount > 0;
+
+                    if (userLikedMovie)
+                    {
+                        pbLLeno.Visible = true;
+                        pbVacio.Visible = false;
+                    }
+                    else
+                    {
+                        pbLLeno.Visible = false;
+                        pbVacio.Visible = true;
+                    }
                 }
                 else
                 {
@@ -73,22 +92,129 @@ namespace MovieMatch
                 }
             }
 
+
         }
 
-        private void chkSaveMovie_CheckedChanged_1(object sender, EventArgs e)
+        //private void pbVacio_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    string titulo = lblTitle.Text;
+        //    pbLLeno.Visible = true;
+        //    pbVacio.Visible = false;
+
+        //    using (var context = new EntityContext())
+        //    {
+        //        // Verificar si la película ya existe en la base de datos
+        //        bool exists = context.Peliculas.Any(p => p.Titulo == titulo);
+
+        //        if (!exists)
+        //        {
+        //            // Insertar los datos de la película en la base de datos
+
+        //            Peliculas pelicula = new Peliculas
+        //            {
+        //                Titulo = lblTitle.Text,
+        //                FechaLanzamiento = DateTime.Parse(lblDate.Text),
+        //                Rating = double.Parse(lblRating.Text),
+        //                Sinopsis = lblOverview.Text,
+        //                Poster = selectedMovie.Poster,
+        //                // Otros campos de la entidad Pelicula
+        //            };
+
+
+        //            string[] genreArray = lblGenere.Text.Split(',');
+
+        //            pelicula.Generos = string.Join(", ", genreArray.Select(genre => genre.Trim()));
+
+        //            // Agregar la nueva entidad al contexto de la base de datos
+        //            context.Peliculas.Add(pelicula);
+
+        //            try
+        //            {
+        //                // Guardar los cambios en la base de datos
+        //                context.SaveChanges();
+
+        //                // Obtener el usuario actual
+        //                Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
+
+        //                // Establecer la relación entre el usuario y la película
+        //                usuario.Peliculas.Add(pelicula);
+
+        //                // Guardar los cambios en la base de datos para insertar la relación
+        //                context.SaveChanges();
+        //            }
+
+        //            catch (DbEntityValidationException ex)
+        //            {
+        //                // Recorrer los errores de validación
+        //                foreach (var entityValidationError in ex.EntityValidationErrors)
+        //                {
+        //                    var entityEntry = entityValidationError.Entry;
+
+        //                    Console.WriteLine($"Validation errors for entity: {entityEntry.Entity.GetType().Name}");
+
+        //                    // Recorrer los errores de validación para la entidad
+        //                    foreach (var validationError in entityValidationError.ValidationErrors)
+        //                    {
+        //                        Console.WriteLine($"Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}");
+        //                    }
+        //                }
+        //            }
+
+        //            MessageBox.Show("Película guardada en la base de datos.");
+        //        }
+        //    }
+
+        //}
+
+        //private void pbLLeno_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    string titulo = lblTitle.Text;
+        //    pbVacio.Visible = true;
+        //    pbLLeno.Visible = false;
+        //    using (var context = new EntityContext())
+        //    {
+        //        // Obtener el usuario actual
+        //        Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
+
+        //        // Obtener la película actual
+        //        Peliculas pelicula = usuario.Peliculas.FirstOrDefault(p => p.Titulo == titulo);
+
+
+        //        if (pelicula != null)
+        //        {
+        //            context.Peliculas.Remove(pelicula);
+        //            try
+        //            {
+        //                // Guardar los cambios en la base de datos para eliminar la relación
+        //                context.SaveChanges();
+        //                MessageBox.Show("Película eliminada de la lista del usuario.");
+        //            }
+        //            catch
+        //            {
+        //                MessageBox.Show("Error al eliminar la película de la lista del usuario.");
+        //            }
+        //        }
+        //    }
+        //}
+        private void pbVacio_MouseClick(object sender, MouseEventArgs e)
         {
             string titulo = lblTitle.Text;
+            pbLLeno.Visible = true;
+            pbVacio.Visible = false;
 
-            if (chkSaveMovie.Checked)
+            using (var context = new EntityContext())
             {
-                using (var context = new EntityContext())
+                // Obtener el usuario actual
+                Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
+
+                if (usuario != null)
                 {
-                    // Verificar si la película ya existe en la base de datos
-                    bool exists = context.Peliculas.Any(p => p.Titulo == titulo);
+                    // Verificar si la película ya existe en la lista del usuario
+                    bool exists = usuario.Peliculas.Any(p => p.Titulo == titulo);
 
                     if (!exists)
                     {
-                        // Insertar los datos de la película en la base de datos
+                        // La película no está en la lista del usuario, agregarla
 
                         Peliculas pelicula = new Peliculas
                         {
@@ -100,92 +226,83 @@ namespace MovieMatch
                             // Otros campos de la entidad Pelicula
                         };
 
-
                         string[] genreArray = lblGenere.Text.Split(',');
-
                         pelicula.Generos = string.Join(", ", genreArray.Select(genre => genre.Trim()));
 
                         // Agregar la nueva entidad al contexto de la base de datos
                         context.Peliculas.Add(pelicula);
 
+                        // Establecer la relación entre el usuario y la película
+                        usuario.Peliculas.Add(pelicula);
+
                         try
                         {
                             // Guardar los cambios en la base de datos
                             context.SaveChanges();
-
-                            // Obtener el usuario actual
-                            Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
-
-                            // Establecer la relación entre el usuario y la película
-                            usuario.Peliculas.Add(pelicula);
-
-                            // Guardar los cambios en la base de datos para insertar la relación
-                            context.SaveChanges();
+                            MessageBox.Show("Película guardada en la lista del usuario.");
                         }
-
-                        catch (DbEntityValidationException ex)
+                        catch
                         {
-                            // Recorrer los errores de validación
-                            foreach (var entityValidationError in ex.EntityValidationErrors)
-                            {
-                                var entityEntry = entityValidationError.Entry;
-
-                                Console.WriteLine($"Validation errors for entity: {entityEntry.Entity.GetType().Name}");
-
-                                // Recorrer los errores de validación para la entidad
-                                foreach (var validationError in entityValidationError.ValidationErrors)
-                                {
-                                    Console.WriteLine($"Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}");
-                                }
-                            }
+                            MessageBox.Show("Error al guardar la película en la lista del usuario.");
                         }
-
-                        MessageBox.Show("Película guardada en la base de datos.");
                     }
-                }
-            }
-            else
-            {
-                using (var context = new EntityContext())
-                {
-                    // Obtener el usuario actual
-                    Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
-
-                    // Obtener la película actual
-                    Peliculas pelicula = usuario.Peliculas.FirstOrDefault(p => p.Titulo == titulo);
-
-
-                    if (pelicula != null)
+                    else
                     {
-                        context.Peliculas.Remove(pelicula);
-                        try
-                {
-                    // Guardar los cambios en la base de datos para eliminar la relación
-                    context.SaveChanges();
-                    MessageBox.Show("Película eliminada de la lista del usuario.");
-                }
-                catch
-                {
-                    MessageBox.Show("Error al eliminar la película de la lista del usuario.");
-                }
+                        MessageBox.Show("La película ya está en la lista del usuario.");
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Usuario no encontrado.");
+                }
             }
-        }
-
-        private void pbVacio_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-            pbLLeno.Visible = true;
-            pbVacio.Visible = false;
         }
 
         private void pbLLeno_MouseClick(object sender, MouseEventArgs e)
         {
-            
+            string titulo = lblTitle.Text;
             pbVacio.Visible = true;
             pbLLeno.Visible = false;
+
+            using (var context = new EntityContext())
+            {
+                // Obtener el usuario actual
+                Usuarios usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == userId);
+
+                if (usuario != null)
+                {
+                    // Obtener la película actual del usuario
+                    Peliculas pelicula = usuario.Peliculas.FirstOrDefault(p => p.Titulo == titulo);
+
+                    if (pelicula != null)
+                    {
+                        // La película está en la lista del usuario, eliminarla
+                        usuario.Peliculas.Remove(pelicula);
+                        context.Peliculas.Remove(pelicula);
+
+                        try
+                        {
+                            // Guardar los cambios en la base de datos
+                            context.SaveChanges();
+                            MessageBox.Show("Película eliminada de la lista del usuario.");
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Error al eliminar la película de la lista del usuario.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("La película no está en la lista del usuario.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Usuario no encontrado.");
+                }
+            }
         }
+
     }
 
 }

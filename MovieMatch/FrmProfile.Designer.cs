@@ -54,7 +54,7 @@
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.ForeColor = System.Drawing.Color.Black;
-            this.btnGuardar.Location = new System.Drawing.Point(199, 577);
+            this.btnGuardar.Location = new System.Drawing.Point(412, 559);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(5);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(336, 38);
@@ -191,27 +191,31 @@
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.ForeColor = System.Drawing.Color.Black;
-            this.btnEliminar.Location = new System.Drawing.Point(652, 577);
+            this.btnEliminar.Location = new System.Drawing.Point(974, 14);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(5);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(349, 38);
+            this.btnEliminar.Size = new System.Drawing.Size(155, 28);
             this.btnEliminar.TabIndex = 30;
-            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Text = "Eliminar Cuenta";
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // imgProfile
             // 
             this.imgProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgProfile.Location = new System.Drawing.Point(354, 35);
+            this.imgProfile.Location = new System.Drawing.Point(412, 25);
             this.imgProfile.Name = "imgProfile";
-            this.imgProfile.Size = new System.Drawing.Size(449, 233);
+            this.imgProfile.Size = new System.Drawing.Size(336, 248);
             this.imgProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgProfile.TabIndex = 32;
             this.imgProfile.TabStop = false;
             // 
             // btnUpload
             // 
+            this.btnUpload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpload.FlatAppearance.BorderSize = 0;
+            this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpload.ForeColor = System.Drawing.SystemColors.Control;
             this.btnUpload.Location = new System.Drawing.Point(825, 128);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(155, 38);
