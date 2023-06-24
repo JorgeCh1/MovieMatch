@@ -28,14 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitForm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblCargando = new System.Windows.Forms.Label();
             this.lblImageCargando = new System.Windows.Forms.Label();
+            this.lblCargando = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.lblImageCargando);
             this.panel1.Controls.Add(this.lblCargando);
             this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -44,6 +46,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(246, 114);
             this.panel1.TabIndex = 0;
+            // 
+            // lblImageCargando
+            // 
+            this.lblImageCargando.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblImageCargando.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblImageCargando.Image = global::MovieMatch.Properties.Resources._219__1_;
+            this.lblImageCargando.Location = new System.Drawing.Point(0, 0);
+            this.lblImageCargando.Name = "lblImageCargando";
+            this.lblImageCargando.Size = new System.Drawing.Size(120, 112);
+            this.lblImageCargando.TabIndex = 1;
             // 
             // lblCargando
             // 
@@ -55,16 +67,6 @@
             this.lblCargando.TabIndex = 0;
             this.lblCargando.Text = "Cargando...";
             // 
-            // lblImageCargando
-            // 
-            this.lblImageCargando.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblImageCargando.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblImageCargando.Image = global::MovieMatch.Properties.Resources._219__1_;
-            this.lblImageCargando.Location = new System.Drawing.Point(0, 0);
-            this.lblImageCargando.Name = "lblImageCargando";
-            this.lblImageCargando.Size = new System.Drawing.Size(120, 114);
-            this.lblImageCargando.TabIndex = 1;
-            // 
             // WaitForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -73,6 +75,7 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "WaitForm";
             this.Text = "WaitForm";

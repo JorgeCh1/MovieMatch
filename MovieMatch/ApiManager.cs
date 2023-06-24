@@ -24,81 +24,81 @@ namespace MovieMatch
 
         // Themoviedb usa paginación quiere decir que en cada página de carga almacena 20 películas.
         // Estos métodos cargan la primera página, esto para mayor eficiencia.
-        public async Task<List<Movie>> ObtenerTodasLasPeliculas()
-        {
-            List<Movie> allMovies = new List<Movie>();
+        //public async Task<List<Movie>> ObtenerTodasLasPeliculas()
+        //{
+        //    List<Movie> allMovies = new List<Movie>();
 
-            try
-            {
-                int pagina = 1;
-                string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
-                HttpResponseMessage response = await httpClient.GetAsync(url);
+        //    try
+        //    {
+        //        int pagina = 1;
+        //        string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
+        //        HttpResponseMessage response = await httpClient.GetAsync(url);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    string json = await response.Content.ReadAsStringAsync();
-                    MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            string json = await response.Content.ReadAsStringAsync();
+        //            MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
 
-                    List<Movie> movies = movieResponse.Results;
-                    allMovies.AddRange(movies);
-                }
-                else
-                {
-                    // Manejar el caso de error en la solicitud HTTP
-                    throw new Exception("Error al obtener las películas");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener las películas: " + ex.Message);
-            }
+        //            List<Movie> movies = movieResponse.Results;
+        //            allMovies.AddRange(movies);
+        //        }
+        //        else
+        //        {
+        //            // Manejar el caso de error en la solicitud HTTP
+        //            throw new Exception("Error al obtener las películas");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Error al obtener las películas: " + ex.Message);
+        //    }
 
-            return allMovies;
-        }
+        //    return allMovies;
+        //}
 
 
-        public async Task<List<Movie>> ObtenerPeliculasPorGenero(string nombreGenero, GenreResponse genreResponse)
-        {
-            List<Movie> peliculasPorGenero = new List<Movie>();
+        //public async Task<List<Movie>> ObtenerPeliculasPorGenero(string nombreGenero, GenreResponse genreResponse)
+        //{
+        //    List<Movie> peliculasPorGenero = new List<Movie>();
 
-            try
-            {
-                int pagina = 1;
-                string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
-                HttpResponseMessage response = await httpClient.GetAsync(url);
+        //    try
+        //    {
+        //        int pagina = 1;
+        //        string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
+        //        HttpResponseMessage response = await httpClient.GetAsync(url);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    string json = await response.Content.ReadAsStringAsync();
-                    MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            string json = await response.Content.ReadAsStringAsync();
+        //            MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
 
-                    // Filtrar las películas por el nombre del género
-                    List<Movie> peliculasFiltradas = movieResponse.Results
-                        .Where(m => m.GenreIds.Any(g => ObtenerNombreGeneroPorId(g, genreResponse).Equals(nombreGenero, StringComparison.OrdinalIgnoreCase)))
-                        .ToList();
+        //            // Filtrar las películas por el nombre del género
+        //            List<Movie> peliculasFiltradas = movieResponse.Results
+        //                .Where(m => m.GenreIds.Any(g => ObtenerNombreGeneroPorId(g, genreResponse).Equals(nombreGenero, StringComparison.OrdinalIgnoreCase)))
+        //                .ToList();
 
-                    peliculasPorGenero.AddRange(peliculasFiltradas);
+        //            peliculasPorGenero.AddRange(peliculasFiltradas);
 
-                    // Punto de depuración para imprimir los datos obtenidos
-                    Console.WriteLine("Películas obtenidas:");
-                    foreach (var pelicula in peliculasPorGenero)
-                    {
-                        Console.WriteLine($"{pelicula.Id} - {pelicula.Title}");
-                    }
-                }
-                else
-                {
-                    // Manejar el caso de error en la solicitud HTTP
-                    throw new Exception("Error al obtener las películas por género");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener las películas por género: " + ex.Message);
-            }
+        //            // Punto de depuración para imprimir los datos obtenidos
+        //            Console.WriteLine("Películas obtenidas:");
+        //            foreach (var pelicula in peliculasPorGenero)
+        //            {
+        //                Console.WriteLine($"{pelicula.Id} - {pelicula.Title}");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            // Manejar el caso de error en la solicitud HTTP
+        //            throw new Exception("Error al obtener las películas por género");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Error al obtener las películas por género: " + ex.Message);
+        //    }
 
-            return peliculasPorGenero;
-        }
+        //    return peliculasPorGenero;
+        //}
 
         // Themoviedb usa paginación quiere decir que en cada página de carga almacena 20 películas.
         // Estos métodos cargan TODAS las páginas, esto por si se quiere usar TODAS las películas (No recomendable).
@@ -201,107 +201,107 @@ namespace MovieMatch
 
         // Themoviedb usa paginación quiere decir que en cada página de carga almacena 20 películas.
         // Estos métodos cargan las páginas que deseemos, en este caso 3, esto para mayor eficiencia y práctica.
-        //public async Task<List<Movie>> ObtenerTodasLasPeliculas()
-        //{
-        //    List<Movie> allMovies = new List<Movie>();
-        //    int maxPaginas = 3;
+        public async Task<List<Movie>> ObtenerTodasLasPeliculas()
+        {
+            List<Movie> allMovies = new List<Movie>();
+            int maxPaginas = 3;
 
-        //    try
-        //    {
-        //        int pagina = 1;
-        //        int paginasCargadas = 0;
-        //        bool hayMasPaginas = true;
+            try
+            {
+                int pagina = 1;
+                int paginasCargadas = 0;
+                bool hayMasPaginas = true;
 
-        //        while (hayMasPaginas && paginasCargadas < maxPaginas)
-        //        {
-        //            string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
-        //            HttpResponseMessage response = await httpClient.GetAsync(url);
+                while (hayMasPaginas && paginasCargadas < maxPaginas)
+                {
+                    string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
+                    HttpResponseMessage response = await httpClient.GetAsync(url);
 
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                string json = await response.Content.ReadAsStringAsync();
-        //                MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+                        MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
 
-        //                List<Movie> movies = movieResponse.Results;
-        //                allMovies.AddRange(movies);
+                        List<Movie> movies = movieResponse.Results;
+                        allMovies.AddRange(movies);
 
-        //                if (pagina >= movieResponse.TotalPages)
-        //                {
-        //                    hayMasPaginas = false;
-        //                }
-        //                else
-        //                {
-        //                    pagina++;
-        //                    paginasCargadas++;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                // Manejar el caso de error en la solicitud HTTP
-        //                hayMasPaginas = false;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Error al obtener las películas: " + ex.Message);
-        //    }
+                        if (pagina >= movieResponse.TotalPages)
+                        {
+                            hayMasPaginas = false;
+                        }
+                        else
+                        {
+                            pagina++;
+                            paginasCargadas++;
+                        }
+                    }
+                    else
+                    {
+                        // Manejar el caso de error en la solicitud HTTP
+                        hayMasPaginas = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las películas: " + ex.Message);
+            }
 
-        //    return allMovies;
-        //}
+            return allMovies;
+        }
 
-        //public async Task<List<Movie>> ObtenerPeliculasPorGenero(string nombreGenero, GenreResponse genreResponse)
-        //{
-        //    List<Movie> peliculasPorGenero = new List<Movie>();
-        //    int maxPaginas = 3;
+        public async Task<List<Movie>> ObtenerPeliculasPorGenero(string nombreGenero, GenreResponse genreResponse)
+        {
+            List<Movie> peliculasPorGenero = new List<Movie>();
+            int maxPaginas = 3;
 
-        //    try
-        //    {
-        //        int pagina = 1;
-        //        int paginasCargadas = 0;
-        //        bool hayMasPaginas = true;
+            try
+            {
+                int pagina = 1;
+                int paginasCargadas = 0;
+                bool hayMasPaginas = true;
 
-        //        while (hayMasPaginas && paginasCargadas < maxPaginas)
-        //        {
-        //            string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
-        //            HttpResponseMessage response = await httpClient.GetAsync(url);
+                while (hayMasPaginas && paginasCargadas < maxPaginas)
+                {
+                    string url = $"{apiUrl}?api_key={apiKey}&page={pagina}";
+                    HttpResponseMessage response = await httpClient.GetAsync(url);
 
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                string json = await response.Content.ReadAsStringAsync();
-        //                MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+                        MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(json);
 
-        //                // Filtrar las películas por el nombre del género
-        //                List<Movie> peliculasFiltradas = movieResponse.Results
-        //                    .Where(m => m.GenreIds.Any(g => ObtenerNombreGeneroPorId(g, genreResponse).Equals(nombreGenero, StringComparison.OrdinalIgnoreCase)))
-        //                    .ToList();
+                        // Filtrar las películas por el nombre del género
+                        List<Movie> peliculasFiltradas = movieResponse.Results
+                            .Where(m => m.GenreIds.Any(g => ObtenerNombreGeneroPorId(g, genreResponse).Equals(nombreGenero, StringComparison.OrdinalIgnoreCase)))
+                            .ToList();
 
-        //                peliculasPorGenero.AddRange(peliculasFiltradas);
+                        peliculasPorGenero.AddRange(peliculasFiltradas);
 
-        //                if (pagina >= movieResponse.TotalPages)
-        //                {
-        //                    hayMasPaginas = false;
-        //                }
-        //                else
-        //                {
-        //                    pagina++;
-        //                    paginasCargadas++;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                // Manejar el caso de error en la solicitud HTTP
-        //                hayMasPaginas = false;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Error al obtener las películas por género: " + ex.Message);
-        //    }
+                        if (pagina >= movieResponse.TotalPages)
+                        {
+                            hayMasPaginas = false;
+                        }
+                        else
+                        {
+                            pagina++;
+                            paginasCargadas++;
+                        }
+                    }
+                    else
+                    {
+                        // Manejar el caso de error en la solicitud HTTP
+                        hayMasPaginas = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las películas por género: " + ex.Message);
+            }
 
-        //    return peliculasPorGenero;
-        //}
+            return peliculasPorGenero;
+        }
 
 
         private string ObtenerNombreGeneroPorId(int genreId, GenreResponse genreResponse)
