@@ -121,7 +121,6 @@ namespace MovieMatch
                             Rating = double.Parse(lblRating.Text),
                             Sinopsis = lblOverview.Text,
                             Poster = selectedMovie.Poster,
-                            // Otros campos de la entidad Pelicula
                         };
 
                         string[] genreArray = lblGenere.Text.Split(',');

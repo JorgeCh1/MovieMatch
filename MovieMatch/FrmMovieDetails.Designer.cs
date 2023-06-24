@@ -34,7 +34,6 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.lblOverview = new System.Windows.Forms.Label();
             this.lblGenere = new System.Windows.Forms.Label();
-            this.chkSaveMovie = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -205,7 +204,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.chkSaveMovie);
             this.Controls.Add(this.lblGenere);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblRating);
@@ -232,7 +230,6 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblOverview;
         private System.Windows.Forms.Label lblGenere;
-        private System.Windows.Forms.CheckBox chkSaveMovie;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label label2;

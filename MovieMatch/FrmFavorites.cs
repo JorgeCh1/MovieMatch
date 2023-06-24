@@ -39,8 +39,12 @@ namespace MovieMatch
             // Obtener los datos de las películas desde la base de datos
             List<Peliculas> peliculas = ObtenerPeliculasDelUsuarioLogueado(userId);
 
-            // Mostrar los datos en el ListView
-            MostrarPeliculasEnListView(peliculas);
+            // Verificar si la lista de películas no está vacía
+            if (peliculas.Count > 0)
+            {
+                // Mostrar los datos en el ListView
+                MostrarPeliculasEnListView(peliculas);
+            }
         }
 
         private async void MostrarPeliculasEnListView(List<Peliculas> peliculas)
@@ -110,26 +114,35 @@ namespace MovieMatch
 
         }
 
+        private List<Peliculas> ObtenerPeliculasDelUsuarioLogueado(int userId)
+        {
+            try
+            {
+                using (var context = new EntityContext())
+                {
+                    var usuario = context.Usuarios.Include("Peliculas").FirstOrDefault(u => u.IdUsuario == userId);
+
+                    if (usuario != null)
+                    {
+                        return usuario.Peliculas.ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción aquí
+                Console.WriteLine("Error al obtener las películas del usuario: " + ex.Message);
+            }
+
+            // Si no se encontraron películas o hubo un error, retornar una lista vacía
+            return new List<Peliculas>();
+        }
+
+
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
         const int LVM_FIRST = 0x1000;
         const int LVM_SETICONSPACING = LVM_FIRST + 100;
-
-
-        private List<Peliculas> ObtenerPeliculasDelUsuarioLogueado(int userId)
-        {
-            using (var context = new EntityContext())
-            {
-                var usuario = context.Usuarios.Include("Peliculas").FirstOrDefault(u => u.IdUsuario == userId);
-
-                if (usuario != null)
-                {
-                    return usuario.Peliculas.ToList();
-                }
-
-                return new List<Peliculas>();
-            }
-        }
     }
 }

@@ -197,7 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
-      <Project>{da1b4c9c-756a-497e-88a0-23cfaf693019}</Project>
+      <Project>{03c2a791-e994-46ee-abc7-1fbf5a8766e1}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
   </ItemGroup>
